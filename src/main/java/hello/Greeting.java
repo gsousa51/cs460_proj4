@@ -4,6 +4,7 @@ public class Greeting {
 
     private long id;
     private String content;
+    private String dropDownTest;
 
     public long getId() {
         return id;
@@ -20,5 +21,10 @@ public class Greeting {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getDropDownTest(){return dropDownTest;}
+
+    public void setDropDownTest(String dropDownTest){ this.dropDownTest = dropDownTest;}
+
 
 }
