@@ -6,16 +6,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!--
-    private int ID;
-    private String fName;
-    private String lName;
-    private String status;
-    //TODO: Figure out how we want to handle this on the form side
-    private String DOB;
-    private String address;
-    private int phone;
-    -->
+
 <h1>Delete Doctor</h1>
 <form action="#" th:action="@{/deleteDoctor}" th:object="${doctor}" method="post">
     <p>ID: <input type="number" required th:field="*{ID}" /></p>

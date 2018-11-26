@@ -6,17 +6,8 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!--
-    private int ID;
-    private String fName;
-    private String lName;
-    private String status;
-    //TODO: Figure out how we want to handle this on the form side
-    private String DOB;
-    private String address;
-    private int phone;
-    -->
-<h1>Add Doctor</h1>
+
+<h1>Update Doctor</h1>
 <form action="#" th:action="@{/updateDoctor}" th:object="${doctor}" method="post">
     <p>ID: <input type="number" required th:field="*{ID}" /></p>
     <p>First Name: <input type="text"  th:field="*{fName}" /></p>
