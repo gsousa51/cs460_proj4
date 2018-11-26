@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--
+    private int ID;
+    private String fName;
+    private String lName;
+    private String status;
+    //TODO: Figure out how we want to handle this on the form side
+    private String DOB;
+    private String address;
+    private int phone;
+    -->
+<h1>Add Doctor</h1>
+<form action="#" th:action="@{/updateDoctor}" th:object="${doctor}" method="post">
+    <p>ID: <input type="number" required th:field="*{ID}" /></p>
+    <p>First Name: <input type="text"  th:field="*{fName}" /></p>
+    <p>Last Name: <input type="text"  th:field="*{lName}" /></p>
+    <p>Status: <input type="text" th:field="*{status}" /></p>
+    <p>Address: <input type="text" th:field="*{address}" /></p>
+    <p>Phone Number: <input type="number" defaultValue="" maxLength="8" th:field="*{phone}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
+</body>
+</html>
