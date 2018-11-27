@@ -12,7 +12,7 @@
     <p>ID: <input type="number" required th:field="*{ID}" /></p>
     <p>First Name: <input type="text" required th:field="*{fName}" /></p>
     <p>Last Name: <input type="text" required th:field="*{lName}" /></p>
-    <p>Gender: <input type="text" maxlength="1"  th:field="*{gender}" /></p>
+    <p>Gender: <input type="text" pattern="[mMfF]" maxlength="1"  th:field="*{gender}" /></p>
     <p>Status: <input type="text"  th:field="*{status}" /></p>
     <p>DOB: <input type="date" required th:field="*{DOB}" /></p>
     <p>Address: <input type="text"  th:field="*{address}" /></p>

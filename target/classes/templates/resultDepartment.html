@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctor Query Results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!--
+    private int ID;
+    private String name;
+    private int office;
+    private String buildingName;
+-->
+
+<h1>Result</h1>
+<p th:text="'ID: ' + ${department.ID}" />
+<p th:text="'Name: ' + ${department.name}" />
+<p th:text="'Office: ' + ${department.office}" />
+<p th:text="'Building Name: ' + ${department.buildingName}" />
+<p th:text="'Empty Office: ' + ${department.emptyOffice}" />
+
+
+
+<a href="/">Home</a>
+</body>
+</html>

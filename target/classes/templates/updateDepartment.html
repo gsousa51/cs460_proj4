@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Cashier Record</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Update Cashier Record</h1>
+<form action="#" th:action="@{/updateDepartment}" th:object="${department}" method="post">
+    <p>ID: <input type="number" required th:field="*{ID}" /></p>
+    <p>Name: <input type="text"  th:field="*{name}" /></p>
+    <p>Office: <input type="number"  th:field="*{s_office}" /></p>
+    <p>Building Name: <input type="text"  th:field="*{buildingName}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
+</body>
+</html>
+
