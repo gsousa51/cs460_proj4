@@ -41,7 +41,9 @@ public class AppointmentController {
         return "updateAppointment";
     }
     @PostMapping("/addAppointment")
-    public String appointmentAdd(@ModelAttribute Appointment appointment) {
+    public String appointmentAdd(Model model, @ModelAttribute Appointment appointment) {
+        model.addAttribute("appointmentValidator", new AppointmentValidator(appointment));
+        System.err.println("Added validator");
         //TODO: Add business logic here
         return "resultAppointment";
     }
