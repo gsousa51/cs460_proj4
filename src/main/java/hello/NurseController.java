@@ -49,8 +49,8 @@ public class NurseController {
 
     @PostMapping("/addNurse")
     public String doctorAdd(@ModelAttribute Nurse nurse) {
-        //TODO: Add business logic here change to nurseResult.
-        return "nurseResult";
+        //TODO: Add business logic here change to resultNurse.
+        return "resultNurse";
     }
 
 
@@ -58,14 +58,14 @@ public class NurseController {
     @PostMapping("/deleteNurse")
     public String nurseDelete(@ModelAttribute Nurse nurse){
         //TODO: Add business logic here
-        return "nurseResult";
+        return "resultNurse";
     }
 
     @PostMapping("/updateNurse")
     public String nurseUpdate(@ModelAttribute Nurse nurse){
         //TODO: We need to figure out how to handle the fields were left empty
         //Most likely answer is check for "" in the strings.
-        return "nurseResult";
+        return "resultNurse";
     }
 
 }

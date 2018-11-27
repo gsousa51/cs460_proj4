@@ -49,8 +49,8 @@ public class StaffController {
 
     @PostMapping("/addStaff")
     public String staffAdd(@ModelAttribute Staff staff) {
-        //TODO: Add business logic here change to staffResult.
-        return "staffResult";
+        //TODO: Add business logic here change to resultStaff.
+        return "resultStaff";
     }
 
 
@@ -58,14 +58,14 @@ public class StaffController {
     @PostMapping("/deleteStaff")
     public String staffDelete(@ModelAttribute Staff staff){
         //TODO: Add business logic here
-        return "staffResult";
+        return "resultStaff";
     }
 
     @PostMapping("/updateStaff")
     public String staffUpdate(@ModelAttribute Staff staff){
         //TODO: We need to figure out how to handle the fields were left empty
         //Most likely answer is check for "" in the strings.
-        return "staffResult";
+        return "resultStaff";
     }
 
 }

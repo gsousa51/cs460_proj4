@@ -48,20 +48,20 @@ public class DoctorController {
     @PostMapping("/addDoctor")
     public String doctorAdd(@ModelAttribute Doctor doctor) {
         //TODO: Add business logic here
-        return "doctorResult";
+        return "resultDoctor";
     }
 
     @PostMapping("/deleteDoctor")
     public String doctorDelete(@ModelAttribute Doctor doctor){
         //TODO: Add business logic here
         System.out.println("Hit the delete endpoint");
-        return "doctorResult";
+        return "resultDoctor";
     }
 
     @PostMapping("/updateDoctor")
     public String doctorUpdate(@ModelAttribute Doctor doctor){
         //TODO: We need to figure out how to handle the fields were left empty
         //Most likely answer is
-        return "doctorResult";
+        return "resultDoctor";
     }
 }
