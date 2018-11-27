@@ -8,11 +8,14 @@ public class CashData {
     private int xactID;
     private int EID;
     private String s_EID;
+    private boolean emptyEID;
+
     private int PID;
+
     private int amount;
     private String s_amount;
     private boolean emptyAmount;
-    private boolean emptyEID;
+
     private java.sql.Date dueDate;
     private String status;
     private java.sql.Date paidDate;

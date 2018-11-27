@@ -9,8 +9,14 @@ public class Pharmacist {
     private String fName;
     private String lName;
     private java.sql.Date DOB;
+
     private int office;
+    private String s_office;
+    private boolean emptyOffice;
+
     private int deptID;
+    private String s_deptID;
+    private boolean emptyDeptID;
 
     public int getID() {
         return ID;
@@ -66,11 +72,55 @@ public class Pharmacist {
         this.office = office;
     }
 
+    public void setS_office(String s_office){
+        if(s_office.equals("")){
+            System.err.println("Setting office to empty");
+            this.emptyOffice = true;
+        }
+        else{
+            this.office = Integer.parseInt(s_office);
+        }
+    }
+
     public int getDeptID() {
         return deptID;
     }
 
     public void setDeptID(int deptID) {
         this.deptID = deptID;
+    }
+
+    public void setS_deptID(String s_deptID){
+        if(s_deptID.equals("")){
+            System.err.println("Setting deptID to empty");
+            this.emptyDeptID = true;
+        }
+        else{
+            this.deptID = Integer.parseInt(s_deptID);
+        }
+    }
+
+    public String getS_office() {
+        return s_office;
+    }
+
+    public boolean isEmptyOffice() {
+        return emptyOffice;
+    }
+
+    public void setEmptyOffice(boolean emptyOffice) {
+        this.emptyOffice = emptyOffice;
+    }
+
+    public String getS_deptID() {
+        return s_deptID;
+    }
+
+    public boolean isEmptyDeptID() {
+        return emptyDeptID;
+    }
+
+    public void setEmptyDeptID(boolean emptyDeptID) {
+        this.emptyDeptID = emptyDeptID;
     }
 }
