@@ -7,15 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-
-import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 public class AppointmentController {
@@ -42,14 +36,15 @@ public class AppointmentController {
     }
     @PostMapping("/addAppointment")
     public String appointmentAdd(Model model, @ModelAttribute Appointment appointment) {
-        model.addAttribute("appointmentValidator", new AppointmentValidator(appointment));
+        model.addAttribute("appointmentValidator", new Validator(appointment));
         System.err.println("Added validator");
         //TODO: Add business logic here
         return "resultAppointment";
     }
 
     @PostMapping("/updateAppointment")
-    public String appointmentUpdate(@ModelAttribute Appointment appointment){
+    public String appointmentUpdate(Model model, @ModelAttribute Appointment appointment){
+        model.addAttribute("appointmentValidator", new Validator(appointment));
         //TODO: We need to figure out how to handle the fields were left empty
         //Most likely answer is
         return "resultAppointment";

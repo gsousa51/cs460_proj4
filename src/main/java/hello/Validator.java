@@ -1,15 +1,27 @@
 package hello;
 
-public class AppointmentValidator {
+public class Validator {
 
     private Appointment appointment;
+    private CashData cashData;
+    private Department department;
     private boolean valid;
     private String message;
 
-    public AppointmentValidator(Appointment appointment){
+    public Validator(Appointment appointment){
         this.appointment = appointment;
         validateAppointment();
     }
+
+    public Validator(CashData cashData){
+        this.cashData = cashData;
+        validateCashData();
+    }
+
+    public Validator(Department department){
+        this.department = department;
+    }
+
 
     private void validateAppointment(){
         if(appointment.getExpDischarge()!= null){
@@ -29,6 +41,23 @@ public class AppointmentValidator {
          */
         this.valid = true;
 
+    }
+    private void validateCashData(){
+        /*
+            TODO: Validate the xActID is unique
+            TODO: Validate EID exists.
+            TODO: Validate PID exists.
+            Everything else doesn't need validated.
+         */
+        this.valid = true;
+    }
+
+    private void validateDepartment(){
+        /*
+            TODO: Validate deptID exists
+            TODO: Validate the office is free?
+         */
+        this.valid = true;
     }
 
     public Appointment getAppointment() {

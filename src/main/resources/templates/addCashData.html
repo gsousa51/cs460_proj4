@@ -22,7 +22,7 @@
     <p>Xact ID: <input type="number" required th:field="*{xactID}" /></p>
     <p>Employee ID: <input type="number" required th:field="*{EID}" /></p>
     <p>Patient ID: <input type="number" required  th:field="*{PID}" /></p>
-    <p>Amount: <input type="number" required th:field="*{amount}" /></p>
+    <p>Amount: <input type="number" min="1"required th:field="*{amount}" /></p>
     <p>Due Date: <input type="date" required th:field="*{dueDate}" /></p>
     <p>Paid Date: <input type="date"  th:field="*{paidDate}" /></p>
     <p>Status: <input type="text" required th:field="*{status}" /></p>

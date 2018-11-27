@@ -12,7 +12,7 @@
 <form action="#" th:action="@{/updateCashData}" th:object="${cashData}" method="post">
     <p>Xact ID: <input type="number" required th:field="*{xactID}" /></p>
     <p>Employee ID: <input type="number"  th:field="*{s_EID}" /></p>
-    <p>Amount: <input type="number"  th:field="*{s_amount}" /></p>
+    <p>Amount: <input type="number" min="1" th:field="*{s_amount}" /></p>
     <p>Due Date: <input type="date"  th:field="*{dueDate}" /></p>
     <p>Paid Date: <input type="date"  th:field="*{paidDate}" /></p>
     <p>Status: <input type="text"  th:field="*{status}" /></p>

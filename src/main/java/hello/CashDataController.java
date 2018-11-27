@@ -41,13 +41,16 @@ public class CashDataController {
         return "updateCashData";
     }
     @PostMapping("/addCashData")
-    public String cashDataAdd(@ModelAttribute CashData cashData) {
+    public String cashDataAdd(Model model, @ModelAttribute CashData cashData) {
+        model.addAttribute("validator", new Validator(cashData));
         //TODO: Add business logic here
         return "resultCashData";
     }
 
     @PostMapping("/updateCashData")
-    public String cashDataUpdate(@ModelAttribute CashData cashData){
+    public String cashDataUpdate(Model model, @ModelAttribute CashData cashData){
+        model.addAttribute("validator", new Validator(cashData));
+
         //TODO: We need to figure out how to handle the fields were left empty
         //Most likely answer is
         return "resultCashData";

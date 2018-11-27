@@ -11,7 +11,7 @@
 <form action="#" th:action="@{/updateDepartment}" th:object="${department}" method="post">
     <p>ID: <input type="number" required th:field="*{ID}" /></p>
     <p>Name: <input type="text"  th:field="*{name}" /></p>
-    <p>Office: <input type="number"  th:field="*{s_office}" /></p>
+    <p>Office: <input type="number" min="1" max="300" th:field="*{s_office}" /></p>
     <p>Building Name: <input type="text"  th:field="*{buildingName}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
