@@ -32,19 +32,19 @@ public class PharmacistController {
     @GetMapping("/addPharmacist")
     public String addpharmacistForm(Model model) {
         model.addAttribute("pharmacist", new Pharmacist());
-        return "addpharmacist";
+        return "addPharmacist";
     }
 
     @GetMapping("/deletePharmacist")
     public String deletepharmacistForm(Model model) {
         model.addAttribute("pharmacist", new Pharmacist());
-        return "deletepharmacist";
+        return "deletePharmacist";
     }
 
     @GetMapping("/updatePharmacist")
     public String updatepharmacistForm(Model model) {
         model.addAttribute("pharmacist", new Pharmacist());
-        return "updatepharmacist";
+        return "updatePharmacist";
     }
 
     @PostMapping("/addPharmacist")

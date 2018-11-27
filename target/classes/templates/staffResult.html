@@ -1,0 +1,25 @@
+
+
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Staff Query Results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+<h1>Result</h1>
+<p th:text="'id: ' + ${staff.ID}" />
+<p th:text="'First Name: ' + ${staff.fName}" />
+<p th:text="'Last Name: ' + ${staff.lName}" />
+<p th:text="'DOB: ' + ${staff.DOB}" />
+<p th:text="'Salary: ' + ${staff.salary}" />
+<p th:text="'Dept ID: ' + ${staff.deptID}" />
+<p th:text="'Office: ' + ${staff.office}" />
+<p th:text="'Title: ' + ${staff.title}" />
+<a href="/">Home</a>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Staff</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!--
+    private int ID;
+    private String fName;
+    private String lName;
+    private java.sql.Date DOB;
+    private int salary;
+    private int deptID;
+    private int office;
+    private String title;
+-->
+<h1>Add Staff</h1>
+<form action="#" th:action="@{/addStaff}" th:object="${staff}" method="post">
+    <p>ID: <input type="number" required th:field="*{ID}" /></p>
+    <p>First Name: <input type="text" required th:field="*{fName}" /></p>
+    <p>Last Name: <input type="text" required th:field="*{lName}" /></p>
+    <p>DOB: <input type="date" required th:field="*{DOB}" /></p>
+    <p>Salary: <input type="number" th:field="*{salary}" /></p>
+    <p>Department ID: <input type="number" th:field="*{deptID}" /></p>
+    <p>Office: <input type="number" th:field="*{office}" /></p>
+    <p>Title: <input type="text"  th:field="*{title}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
+</body>
+</html>
