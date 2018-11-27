@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Cashier Record</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+<!--
+    private int xactID;
+    private int EID;
+    private int PID;
+    private int amount;
+    private java.sql.Date dueDate;
+    private String status;
+    private java.sql.Date paidDate;
+-->
+<h1>Add Cashier Record</h1>
+<form action="#" th:action="@{/addCashData}" th:object="${cashData}" method="post">
+    <p>Xact ID: <input type="number" required th:field="*{xactID}" /></p>
+    <p>Employee ID: <input type="number" required th:field="*{EID}" /></p>
+    <p>Patient ID: <input type="number" required  th:field="*{PID}" /></p>
+    <p>Amount: <input type="number" required th:field="*{amount}" /></p>
+    <p>Due Date: <input type="date" required th:field="*{dueDate}" /></p>
+    <p>Paid Date: <input type="date"  th:field="*{paidDate}" /></p>
+    <p>Status: <input type="text" required th:field="*{status}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
+</body>
+</html>
+

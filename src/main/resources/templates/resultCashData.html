@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cashier Record Query Results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Result</h1>
+<p th:text="'Xact ID: ' + ${cashData.xactID}" />
+<p th:text="'Employee ID: ' + ${cashData.EID}" />
+<p th:text="'Patient ID: ' + ${cashData.PID}" />
+<p th:text="'Amount: ' + ${cashData.amount}" />
+<p th:text="'Due Date: ' + ${cashData.dueDate}" />
+<p th:text="'Paid Date: ' + ${cashData.paidDate}" />
+<p th:text="'Status: ' + ${cashData.status}" />
+<p th:text="'Empty EID: ' + ${cashData.emptyEID}" />
+<p th:text="'Empty Amount: ' + ${cashData.emptyAmount}" />
+<a href="/">Home</a>
+</body>
+</html>

@@ -11,9 +11,18 @@ public class Doctor {
     private String status;
     private java.sql.Date DOB;
     private String address;
+
     private int phone;
+    private String s_phone;
+    private boolean emptyPhone;
+
     private int deptID;
+    private String s_deptID;
+    private boolean emptyDeptID;
+
     private int office;
+    private String s_office;
+    private boolean emptyOffice;
 
     public int getID() {
         return ID;
@@ -84,6 +93,16 @@ public class Doctor {
         this.phone = phone;
     }
 
+    public void setS_phone(String s_phone) {
+        if(s_phone.equals("")){
+            System.err.println("Set phone to empty");
+            this.emptyPhone = true;
+        }
+        else{
+            this.phone = Integer.parseInt(s_phone);
+        }
+    }
+
     public int getDeptID() {
         return deptID;
     }
@@ -92,11 +111,55 @@ public class Doctor {
         this.deptID = deptID;
     }
 
+    public void setS_deptID(String s_deptID) {
+        if(s_deptID.equals("")){
+            System.err.println("Set deptID to empty");
+            this.emptyDeptID = true;
+        }
+        else{
+            this.deptID = Integer.parseInt(s_deptID);
+        }
+    }
+
     public int getOffice() {
         return office;
     }
 
     public void setOffice(int office) {
         this.office = office;
+    }
+
+    public void setS_office(String s_office){
+        if(s_office.equals("")){
+            System.err.println("Setting office to empty");
+            this.emptyOffice = true;
+        }
+        else{
+            this.office = Integer.parseInt(s_office);
+        }
+    }
+
+    public String getS_phone() {
+        return s_phone;
+    }
+
+    public boolean isEmptyPhone() {
+        return emptyPhone;
+    }
+
+    public String getS_deptID() {
+        return s_deptID;
+    }
+
+    public boolean isEmptyDeptID() {
+        return emptyDeptID;
+    }
+
+    public String getS_office() {
+        return s_office;
+    }
+
+    public boolean isEmptyOffice() {
+        return emptyOffice;
     }
 }
