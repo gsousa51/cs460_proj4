@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nurse Query Results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Result</h1>
+<p th:text="'id: ' + ${nurse.ID}" />
+<p th:text="'First Name: ' + ${nurse.fName}" />
+<p th:text="'Last Name: ' + ${nurse.lName}" />
+<p th:text="'DOB: ' + ${nurse.DOB}" />
+<p th:text="'Room: ' + ${nurse.room}" />
+<p th:text="'Dept ID: ' + ${nurse.deptID}" />
+<a href="/doctor">Add Another Nurse</a>
+<a href="/">Home</a>
+</body>
+</html>

@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Controller
-public class DoctorController {
+public class NurseController {
 
     @Autowired
     private DataSource dataSource;
@@ -29,39 +29,44 @@ public class DoctorController {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    @GetMapping("/addDoctor")
-    public String addDoctorForm(Model model) {
-        model.addAttribute("doctor", new Doctor());
-        return "addDoctor";
+    @GetMapping("/addNurse")
+    public String addNurseForm(Model model) {
+        model.addAttribute("nurse", new Nurse());
+        return "addNurse";
     }
-
+/*
     @GetMapping("/deleteDoctor")
     public String deleteDoctorForm(Model model) {
         model.addAttribute("doctor", new Doctor());
         return "deleteDoctor";
     }
-    @GetMapping("/updateDoctor")
-    public String updateDoctorForm(Model model) {
-        model.addAttribute("doctor", new Doctor());
-        return "updateDoctor";
-    }
-    @PostMapping("/addDoctor")
-    public String doctorAdd(@ModelAttribute Doctor doctor) {
-        //TODO: Add business logic here
-        return "doctorResult";
+    */
+    @GetMapping("/updateNurse")
+    public String updateNurseForm(Model model) {
+        model.addAttribute("nurse", new Nurse());
+        return "updateNurse";
     }
 
+    @PostMapping("/addNurse")
+    public String doctorAdd(@ModelAttribute Nurse nurse) {
+        //TODO: Add business logic here change to nurseResult.
+        return "nurseResult";
+    }
+
+
+    /*
     @PostMapping("/deleteDoctor")
     public String doctorDelete(@ModelAttribute Doctor doctor){
         //TODO: Add business logic here
         System.out.println("Hit the delete endpoint");
         return "doctorResult";
     }
-
-    @PostMapping("/updateDoctor")
-    public String doctorUpdate(@ModelAttribute Doctor doctor){
+*/
+    @PostMapping("/updateNurse")
+    public String nurseUpdate(@ModelAttribute Nurse nurse){
         //TODO: We need to figure out how to handle the fields were left empty
         //Most likely answer is
-        return "doctorResult";
+        return "nurseResult";
     }
+
 }

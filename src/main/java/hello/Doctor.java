@@ -9,10 +9,11 @@ public class Doctor {
     private String fName;
     private String lName;
     private String status;
-    //TODO: Figure out how we want to handle this on the form side
     private java.sql.Date DOB;
     private String address;
     private int phone;
+    private int deptID;
+    private int office;
 
     public int getID() {
         return ID;
@@ -81,5 +82,21 @@ public class Doctor {
 
     public void setPhone(int phone) {
         this.phone = phone;
+    }
+
+    public int getDeptID() {
+        return deptID;
+    }
+
+    public void setDeptID(int deptID) {
+        this.deptID = deptID;
+    }
+
+    public int getOffice() {
+        return office;
+    }
+
+    public void setOffice(int office) {
+        this.office = office;
     }
 }

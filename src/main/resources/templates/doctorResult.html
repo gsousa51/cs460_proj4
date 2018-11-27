@@ -1,21 +1,12 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
+    <title>Doctor Query Results</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!--
-    private int ID;
-    private String fName;
-    private String lName;
-    private String status;
-    //TODO: Figure out how we want to handle this on the form side
-    private String DOB;
-    private String address;
-    private int phone;
-    -->
+
 <h1>Result</h1>
 <p th:text="'id: ' + ${doctor.ID}" />
 <p th:text="'First Name: ' + ${doctor.fName}" />
@@ -24,7 +15,10 @@
 <p th:text="'DOB: ' + ${doctor.DOB}" />
 <p th:text="'Address: ' + ${doctor.address}" />
 <p th:text="'Phone: ' + ${doctor.phone}" />
-<a href="/doctor">Submit another message</a>
-<a href="">Home</a>
+<p th:text="'Dept ID: ' + ${doctor.deptID}" />
+<p th:text="'Office: ' + ${doctor.office}" />
+
+<a href="/doctor">Add Another Doctor </a>
+<a href="/">Home</a>
 </body>
 </html>

@@ -1,22 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Update Doctor</title>
+    <title>Update Nurse</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<h1>Update Doctor</h1>
-<form action="#" th:action="@{/updateDoctor}" th:object="${doctor}" method="post">
+
+<h1>Update Nurse</h1>
+<form action="#" th:action="@{/updateNurse}" th:object="${nurse}" method="post">
     <p>ID: <input type="number" required th:field="*{ID}" /></p>
     <p>First Name: <input type="text"  th:field="*{fName}" /></p>
     <p>Last Name: <input type="text"  th:field="*{lName}" /></p>
-    <p>Status: <input type="text" th:field="*{status}" /></p>
-    <p>Address: <input type="text" th:field="*{address}" /></p>
-    <p>Phone Number: <input type="number"  maxLength="8" th:field="*{phone}" /></p>
-    <p>Dept ID: <input type="number" th:field="*{deptID}" /></p>
-    <p>Office: <input type="number" th:field="*{office}" /></p>
+    <p>Room: <input type="number" th:field="*{room}" /></p>
+    <p>Department ID: <input type="number" th:field="*{deptID}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 

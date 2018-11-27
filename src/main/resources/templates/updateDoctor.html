@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Handling Form Submission</title>
+    <title>Update Doctor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,6 +15,8 @@
     <p>Status: <input type="text" th:field="*{status}" /></p>
     <p>Address: <input type="text" th:field="*{address}" /></p>
     <p>Phone Number: <input type="number"  maxLength="8" th:field="*{phone}" /></p>
+    <p>Dept ID: <input type="number" th:field="*{deptID}" /></p>
+    <p>Office: <input type="number" th:field="*{office}" /></p>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 
