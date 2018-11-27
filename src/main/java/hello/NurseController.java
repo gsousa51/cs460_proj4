@@ -34,13 +34,13 @@ public class NurseController {
         model.addAttribute("nurse", new Nurse());
         return "addNurse";
     }
-/*
-    @GetMapping("/deleteDoctor")
-    public String deleteDoctorForm(Model model) {
-        model.addAttribute("doctor", new Doctor());
-        return "deleteDoctor";
+
+    @GetMapping("/deleteNurse")
+    public String deleteNurseForm(Model model) {
+        model.addAttribute("nurse", new Nurse());
+        return "deleteNurse";
     }
-    */
+
     @GetMapping("/updateNurse")
     public String updateNurseForm(Model model) {
         model.addAttribute("nurse", new Nurse());
@@ -54,18 +54,17 @@ public class NurseController {
     }
 
 
-    /*
-    @PostMapping("/deleteDoctor")
-    public String doctorDelete(@ModelAttribute Doctor doctor){
+
+    @PostMapping("/deleteNurse")
+    public String nurseDelete(@ModelAttribute Nurse nurse){
         //TODO: Add business logic here
-        System.out.println("Hit the delete endpoint");
-        return "doctorResult";
+        return "nurseResult";
     }
-*/
+
     @PostMapping("/updateNurse")
     public String nurseUpdate(@ModelAttribute Nurse nurse){
         //TODO: We need to figure out how to handle the fields were left empty
-        //Most likely answer is
+        //Most likely answer is check for "" in the strings.
         return "nurseResult";
     }
 
