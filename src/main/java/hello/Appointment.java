@@ -1,5 +1,9 @@
 package hello;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class Appointment {
     //Appointment ID
     private int AID;
@@ -8,11 +12,9 @@ public class Appointment {
     //Patient ID
     private int PID;
     private String reason;
-    //TODO: Figure out how we want to handle this on the form side
-    private String DOB;
-    private String admission;
-    private String expDischarge;
-    private String actDischarge;
+    private java.sql.Date admission;
+    private java.sql.Date expDischarge;
+    private java.sql.Date actDischarge;
     private int room;
     private String treatment;
 
@@ -48,36 +50,76 @@ public class Appointment {
         this.reason = reason;
     }
 
-    public String getDOB() {
-        return DOB;
+
+
+    public Date getAdmission() {
+        return this.admission;
     }
 
-    public void setDOB(String DOB) {
-        this.DOB = DOB;
-    }
-
-    public String getAdmission() {
-        return admission;
-    }
-
+    /*
+            Date comes in as yyyy-MM-dd
+         */
     public void setAdmission(String admission) {
-        this.admission = admission;
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = null;
+        try {
+            date = sdf1.parse(admission);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.err.println("Error in date format.");
+        }
+        this.admission = new java.sql.Date(date.getTime());
+
     }
 
-    public String getExpDischarge() {
-        return expDischarge;
+
+    public Date getExpDischarge() {
+        return this.expDischarge;
     }
 
+    /*
+            Date comes in as yyyy-MM-dd
+         */
     public void setExpDischarge(String expDischarge) {
-        this.expDischarge = expDischarge;
+        if(expDischarge.equals("")){
+            System.err.println("Rejected an empty date for expected discharge");
+            return;
+        }
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = null;
+        try {
+            date = sdf1.parse(expDischarge);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.err.println("Error in date format.");
+        }
+        this.expDischarge = new java.sql.Date(date.getTime());
+
     }
 
-    public String getActDischarge() {
-        return actDischarge;
+    public Date getActDischarge() {
+        return this.actDischarge;
     }
 
+    /*
+            Date comes in as yyyy-MM-dd
+         */
     public void setActDischarge(String actDischarge) {
-        this.actDischarge = actDischarge;
+        if(actDischarge.equals("")){
+            System.err.println("Rejected an empty date for actual discharge");
+            return;
+        }
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = null;
+        try {
+            date = sdf1.parse(actDischarge);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            System.err.println("Error in date format.");
+        }
+        this.actDischarge = new java.sql.Date(date.getTime());
+
     }
 
     public int getRoom() {

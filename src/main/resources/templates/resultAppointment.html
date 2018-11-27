@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Appointment Query Results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!--
+    //Appointment ID
+    private int AID;
+    //Doctor ID
+    private int DID;
+    //Patient ID
+    private int PID;
+    private String reason;
+    private java.sql.Date admission;
+    private java.sql.Date expDischarge;
+    private java.sql.Date actDischarge;
+    private int room;
+    private String treatment;
+-->
+<h1>Result</h1>
+<p th:text="'Appointment ID: ' + ${appointment.AID}" />
+<p th:text="'Doctor ID: ' + ${appointment.DID}" />
+<p th:text="'Patient ID: ' + ${appointment.PID}" />
+<p th:text="'Reason: ' + ${appointment.reason}" />
+<p th:text="'Admission: ' + ${appointment.admission}" />
+<p th:text="'Exp. Discharge: ' + ${appointment.expDischarge}" />
+<p th:text="'Act. Discharge: ' + ${appointment.actDischarge}" />
+<p th:text="'Room: ' + ${appointment.room}" />
+<p th:text="'Treatment: ' + ${appointment.treatment}" />
+<a href="/">Home</a>
+</body>
+</html>

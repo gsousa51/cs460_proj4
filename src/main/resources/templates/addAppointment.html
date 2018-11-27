@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Appointment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Add Appointment</h1>
+<form action="#" th:action="@{/addAppointment}" th:object="${appointment}" method="post">
+    <p>Appointment ID: <input type="number" required th:field="*{AID}" /></p>
+    <p>Patient ID: <input type="number" required th:field="*{PID}" /></p>
+    <p>Doctor ID: <input type="number"  th:field="*{DID}" /></p>
+    <p>Reason for Visit: <input type="text" required th:field="*{reason}" /></p>
+    <p>Admission Date: <input type="date" required th:field="*{admission}" /></p>
+    <p>Expected Discharge: <input type="date"  th:field="*{expDischarge}" /></p>
+    <p>Actual Discharge: <input type="date"  th:field="*{actDischarge}" /></p>
+    <p>Room Number: <input type="number" th:field="*{room}" /></p>
+    <p>Treatment Type: <input type="text" th:field="*{treatment}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
+</body>
+</html>
