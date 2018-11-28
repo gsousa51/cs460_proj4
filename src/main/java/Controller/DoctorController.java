@@ -1,5 +1,6 @@
 package Controller;
 
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,10 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import Model.Doctor;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class DoctorController {
@@ -44,6 +49,17 @@ public class DoctorController {
     @PostMapping("/addDoctor")
     public String doctorAdd(@ModelAttribute Doctor doctor) {
         //TODO: Add business logic here
+        List<String> allNames = this.jdbcTemplate.query(
+                "select * from aswindle.doctor",
+                new RowMapper<String>() {
+                    public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        long first_name = rs.getLong("DOB");
+                        String last_name = rs.getString("L_NAME");
+                        System.out.println(first_name + " " + last_name);
+                        return (first_name + " " + last_name);
+                    }
+                });
+        System.out.println(allNames.toString());
         return "resultDoctor";
     }
 
