@@ -41,7 +41,7 @@ public class DoctorValidator {
             updateMessage = updateMessage.concat("L_Name = NULL");
         }
         else{
-            updateMessage = updateMessage.concat("L_Name = " + doctor.getlName()+"'");
+            updateMessage = updateMessage.concat("L_Name = '" + doctor.getlName()+"'");
         }
         updateMessage = updateMessage.concat(",\n");
         if(doctor.getfName().equals("")){
@@ -55,7 +55,7 @@ public class DoctorValidator {
             updateMessage = updateMessage.concat("Status = NULL");
         }
         else{
-            updateMessage = updateMessage.concat("Status = " + doctor.getStatus());
+            updateMessage = updateMessage.concat("Status = '" + doctor.getStatus() + "'");
         }
         updateMessage = updateMessage.concat(",\n");
 
