@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import Model.Appointment;
-import Model.Validator;
+import Model.AppointmentValidator;
 
 @Controller
 public class AppointmentController {
@@ -39,7 +39,7 @@ public class AppointmentController {
     }
     @PostMapping("/addAppointment")
     public String appointmentAdd(Model model, @ModelAttribute Appointment appointment) {
-        model.addAttribute("appointmentValidator", new Validator(appointment));
+        model.addAttribute("appointmentValidator", new AppointmentValidator(appointment));
         System.err.println("Added validator");
         jdbcTemplate.update("insert into aswindle.appointment values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 appointment.getAID(), appointment.getPID(), appointment.getDID(), appointment.getReason(),
@@ -52,7 +52,7 @@ public class AppointmentController {
 
     @PostMapping("/updateAppointment")
     public String appointmentUpdate(Model model, @ModelAttribute Appointment appointment){
-        model.addAttribute("appointmentValidator", new Validator(appointment));
+        model.addAttribute("appointmentValidator", new AppointmentValidator(appointment));
         // Not PID, AID, reason, appt_date
         jdbcTemplate.update("update aswindle.appointment " +
                         "set DID = ?, admission = ?, exp_discharge = ?, act_discharge = ?, room = ?, treatment = ?" +
