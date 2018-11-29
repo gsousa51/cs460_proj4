@@ -1,5 +1,6 @@
 package Controller;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,8 +54,13 @@ public class DoctorController {
         DoctorValidator doctorValidator = new DoctorValidator(doctor);
         model.addAttribute(doctorValidator);
         if(doctorValidator.isValid()) {
-            this.jdbcTemplate.update(doctorValidator.getInsertMessage());
-            System.err.println("Insert Query: " + doctorValidator.getInsertMessage());
+            try {
+
+                this.jdbcTemplate.update(doctorValidator.getInsertMessage());
+
+            }catch(DataAccessException d){
+                System.err.println("*****CAUGHT ERROR*****");
+            }
         }
         return "resultDoctor";
     }
