@@ -33,6 +33,17 @@ public class DoctorController {
     @GetMapping("/addDoctor")
     public String addDoctorForm(Model model) {
         model.addAttribute("doctor", new Doctor());
+        List<String> allNames = this.jdbcTemplate.query(
+                "select * from aswindle.doctor",
+                new RowMapper<String>() {
+                    public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        long first_name = rs.getLong("DOB");
+                        String last_name = rs.getString("L_NAME");
+                        System.out.println(first_name + " " + last_name);
+                        return (first_name + " " + last_name);
+                    }
+                });
+        System.out.println(allNames.toString());
         return "addDoctor";
     }
 

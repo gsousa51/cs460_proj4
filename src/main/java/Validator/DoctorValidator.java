@@ -35,17 +35,7 @@ public class DoctorValidator {
     }
 
     private void testQuery(){
-        List<String> allNames = this.jdbcTemplate.query(
-                "select * from aswindle.doctor",
-                new RowMapper<String>() {
-                    public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        long first_name = rs.getLong("DOB");
-                        String last_name = rs.getString("L_NAME");
-                        System.out.println(first_name + " " + last_name);
-                        return (first_name + " " + last_name);
-                    }
-                });
-        System.out.println(allNames.toString());
+
     }
     private void validate(){
 
