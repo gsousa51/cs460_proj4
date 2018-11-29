@@ -75,7 +75,7 @@ public class DoctorValidator {
         }
         updateMessage = updateMessage.concat("\n");
 
-        updateMessage = updateMessage.concat(" WHERE DID = " + doctor.getID() + ";");
+        updateMessage = updateMessage.concat(" WHERE DID = " + doctor.getID() + "\n");
 
         return updateMessage;
     }
