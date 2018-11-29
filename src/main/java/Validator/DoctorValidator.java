@@ -30,6 +30,7 @@ public class DoctorValidator {
     Status, dept_ID, office
      */
     public String getInsertMessage(){
+
         String insertMessage = "INSERT INTO aswindle.doctor VALUES(";
         insertMessage = insertMessage.concat(doctor.getID()+",");
         insertMessage = insertMessage.concat("'" + doctor.getlName()+ "',");
@@ -60,50 +61,55 @@ public class DoctorValidator {
 
         return insertMessage;
     }
+
     public String getUpdateMessage(){
         String updateMessage = "UPDATE aswindle.Doctor \nSET ";
-        if(doctor.getlName().equals("")){
-            updateMessage = updateMessage.concat("L_Name = NULL");
-        }
-        else{
+
+        if(!doctor.getlName().equals("")){
+            valid = true;
             updateMessage = updateMessage.concat("L_Name = '" + doctor.getlName()+"'");
+            updateMessage = updateMessage.concat("\n");
         }
-        updateMessage = updateMessage.concat(",\n");
-        if(doctor.getfName().equals("")){
-            updateMessage = updateMessage.concat("F_Name = NULL");
-        }
-        else{
+        if(!doctor.getfName().equals("")){
+            if(valid){
+                updateMessage = updateMessage.concat(",");
+            }
             updateMessage =  updateMessage.concat("F_Name = '" + doctor.getfName()+"'");
+            updateMessage =  updateMessage.concat("\n");
+            valid  = true;
         }
-        updateMessage =  updateMessage.concat(",\n");
-        if(doctor.getStatus().equals("")){
-            updateMessage = updateMessage.concat("Status = NULL");
-        }
-        else{
+
+        if(!doctor.getStatus().equals("")){
+            if(valid){
+                updateMessage = updateMessage.concat(",");
+            }
             updateMessage = updateMessage.concat("Status = '" + doctor.getStatus() + "'");
+            updateMessage = updateMessage.concat("\n");
+            valid = true;
         }
-        updateMessage = updateMessage.concat(",\n");
 
-        if(doctor.isEmptyDeptID()){
-            updateMessage = updateMessage.concat("Dept_ID = NULL");
-        }
-        else{
+        if(!doctor.isEmptyDeptID()){
+            if(valid){
+                updateMessage = updateMessage.concat(",");
+            }
             updateMessage = updateMessage.concat("Dept_ID = " + doctor.getDeptID());
+            updateMessage = updateMessage.concat("\n");
+            valid = true;
         }
-        updateMessage = updateMessage.concat(",\n");
 
-        if(doctor.isEmptyOffice()){
-            updateMessage = updateMessage.concat("Office = NULL");
-        }
-        else{
+        if(!doctor.isEmptyOffice()){
+            if(valid){
+                updateMessage = updateMessage.concat(",");
+            }
             updateMessage = updateMessage.concat("Office = " + doctor.getOffice());
+            updateMessage = updateMessage.concat("\n");
+            valid = true;
         }
-        updateMessage = updateMessage.concat("\n");
 
         updateMessage = updateMessage.concat(" WHERE DID = " + doctor.getID() + "\n");
-
         return updateMessage;
     }
+
     private void validate(){
 
     }
