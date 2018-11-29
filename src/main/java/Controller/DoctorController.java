@@ -65,8 +65,6 @@ public class DoctorController {
 
     @PostMapping("/updateDoctor")
     public String doctorUpdate(Model model, @ModelAttribute Doctor doctor){
-        //TODO: We need to figure out how to handle the fields were left empty
-        //Most likely answer is
         model.addAttribute("validation", new DoctorValidator(doctor));
         return "resultDoctor";
     }

@@ -30,12 +30,12 @@ public class DoctorValidator {
     public DoctorValidator(Doctor doctor){
         this.doctor = doctor;
         this.valid = false;
-        this.updateMessage = getUpdateMessage();
+        this.updateMessage = getUpdate();
         validate();
 
     }
 
-    private String getUpdateMessage(){
+    private String getUpdate(){
         String updateMessage = "UPDATE aswindle.Doctor \n SET ";
         if(doctor.getlName().equals("")){
             updateMessage = updateMessage.concat("L_Name = NULL");
@@ -91,5 +91,9 @@ public class DoctorValidator {
 
     public void setUpdateMessage(String updateMessage) {
         this.updateMessage = updateMessage;
+    }
+
+    public String getUpdateMessage() {
+        return updateMessage;
     }
 }
