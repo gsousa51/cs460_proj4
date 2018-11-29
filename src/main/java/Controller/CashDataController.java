@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import Model.CashData;
-import Model.Validator;
+import Model.CashDataValidator;
 
 @Controller
 public class CashDataController {
@@ -40,22 +40,30 @@ public class CashDataController {
 
     @PostMapping("/addCashData")
     public String cashDataAdd(Model model, @ModelAttribute CashData cashData) {
-        model.addAttribute("validator", new Validator(cashData));
-        jdbcTemplate.update("insert into aswindle.cash_data values (?, ?, ?, ?, ?, ?, ?)",
-                cashData.getXactID(), cashData.getEID(), cashData.getPID(), cashData.getAmount(),
-                cashData.getDueDate().getTime(), cashData.getStatus(), cashData.getPaidDate().getTime());
+        CashDataValidator validator = new CashDataValidator(cashData);
+        validator.validateAddCashData();
+        model.addAttribute("validator", validator);
+        if(validator.isValid()) {
+            jdbcTemplate.update("insert into aswindle.cash_data values (?, ?, ?, ?, ?, ?, ?)",
+                    cashData.getXactID(), cashData.getEID(), cashData.getPID(), cashData.getAmount(),
+                    cashData.getDueDate().getTime(), cashData.getStatus(), cashData.getPaidDate().getTime());
+        }
         return "resultCashData";
     }
 
     @PostMapping("/updateCashData")
     public String cashDataUpdate(Model model, @ModelAttribute CashData cashData) {
-        model.addAttribute("validator", new Validator(cashData));
-        jdbcTemplate.update("update aswindle.cash_data " +
-                        "set eid = ?, pid = ?, amount = ?, due = ?, status = ?, paid = ? " +
-                        "where xact_id = ?",
-                cashData.getEID(), cashData.getPID(), cashData.getAmount(),
-                cashData.getDueDate().getTime(), cashData.getStatus(), cashData.getPaidDate().getTime(),
-                cashData.getXactID());
+        CashDataValidator validator = new CashDataValidator(cashData);
+        validator.validateUpdateCashData();
+        model.addAttribute("validator", validator);
+        if(validator.isValid()) {
+            jdbcTemplate.update("update aswindle.cash_data " +
+                            "set eid = ?, pid = ?, amount = ?, due = ?, status = ?, paid = ? " +
+                            "where xact_id = ?",
+                    cashData.getEID(), cashData.getPID(), cashData.getAmount(),
+                    cashData.getDueDate().getTime(), cashData.getStatus(), cashData.getPaidDate().getTime(),
+                    cashData.getXactID());
+        }
         return "resultCashData";
     }
 }

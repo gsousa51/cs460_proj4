@@ -81,10 +81,13 @@ public class AppointmentValidator {
         }
         // Check dates
         if(appointment.getAdmission() != null){
+            // TODO: pull Appt_Date from the DB to query against
+            /*
             if(appointment.getAdmission().getTime() < appointment.getApptDate().getTime()){
                 message = "Error: admission can't be before appointment date.\n";
                 return;
             }
+            */
             if(appointment.getExpDischarge()!= null){
                 if(appointment.getExpDischarge().getTime() < appointment.getAdmission().getTime()){
                     message = "Error: expected discharge can't be before admission.\n";
