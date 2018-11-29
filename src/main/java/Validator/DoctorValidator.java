@@ -36,7 +36,7 @@ public class DoctorValidator {
     }
 
     private String getUpdate(){
-        String updateMessage = "UPDATE aswindle.Doctor \n SET ";
+        String updateMessage = "UPDATE aswindle.Doctor \nSET ";
         if(doctor.getlName().equals("")){
             updateMessage = updateMessage.concat("L_Name = NULL");
         }
@@ -57,6 +57,8 @@ public class DoctorValidator {
         else{
             updateMessage = updateMessage.concat("Status = " + doctor.getStatus());
         }
+        updateMessage = updateMessage.concat(",\n");
+
         if(doctor.isEmptyDeptID()){
             updateMessage = updateMessage.concat("DeptID = NULL");
         }

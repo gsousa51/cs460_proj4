@@ -65,7 +65,12 @@ public class DoctorController {
 
     @PostMapping("/updateDoctor")
     public String doctorUpdate(Model model, @ModelAttribute Doctor doctor){
-        model.addAttribute("validation", new DoctorValidator(doctor));
+        DoctorValidator doctorValidator = new DoctorValidator(doctor);
+        model.addAttribute("validation", doctorValidator);
+        if(doctorValidator.isValid()){
+            this.jdbcTemplate.update(doctorValidator.getUpdateMessage());
+            System.err.println("executed update query");
+        }
         return "resultDoctor";
     }
 }
