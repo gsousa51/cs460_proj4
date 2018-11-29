@@ -64,7 +64,7 @@ public class AppointmentValidator {
         // Check treatment
         if(appointment.getTreatment() != null){
             if(!appointment.getTreatment().equals("medical") && !appointment.getTreatment().equals("surgical") &&
-                    !appointment.getTreatment().equals("physical theraphy")){
+                    !appointment.getTreatment().equals("physical therapy")){
                 message = "Error: treatment must be 'medical', 'surgical', or 'physical therapy'\n";
                 return;
             }
