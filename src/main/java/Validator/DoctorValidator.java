@@ -16,7 +16,7 @@ public class DoctorValidator {
 
     private Doctor doctor;
     private boolean valid;
-
+    private String updateMessage;
     @Autowired
     private DataSource dataSource;
     private JdbcTemplate jdbcTemplate;
@@ -30,6 +30,7 @@ public class DoctorValidator {
     public DoctorValidator(Doctor doctor){
         this.doctor = doctor;
         this.valid = false;
+        this.updateMessage = getUpdateMessage();
         validate();
 
     }
@@ -78,5 +79,17 @@ public class DoctorValidator {
     }
     private void validate(){
 
+    }
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
+    public void setUpdateMessage(String updateMessage) {
+        this.updateMessage = updateMessage;
     }
 }

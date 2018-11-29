@@ -30,20 +30,11 @@ public class DoctorController {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+
     @GetMapping("/addDoctor")
     public String addDoctorForm(Model model) {
         model.addAttribute("doctor", new Doctor());
-        List<String> allNames = this.jdbcTemplate.query(
-                "select * from aswindle.doctor",
-                new RowMapper<String>() {
-                    public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        long first_name = rs.getLong("DOB");
-                        String last_name = rs.getString("L_NAME");
-                        System.out.println(first_name + " " + last_name);
-                        return (first_name + " " + last_name);
-                    }
-                });
-        System.out.println(allNames.toString());
+
         return "addDoctor";
     }
 
@@ -73,9 +64,23 @@ public class DoctorController {
     }
 
     @PostMapping("/updateDoctor")
-    public String doctorUpdate(@ModelAttribute Doctor doctor){
+    public String doctorUpdate(Model model, @ModelAttribute Doctor doctor){
         //TODO: We need to figure out how to handle the fields were left empty
         //Most likely answer is
+        model.addAttribute("validation", new DoctorValidator(doctor));
         return "resultDoctor";
     }
 }
+    /*
+            List<String> allNames = this.jdbcTemplate.query(
+                "select * from aswindle.doctor",
+                new RowMapper<String>() {
+                    public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        long first_name = rs.getLong("DOB");
+                        String last_name = rs.getString("L_NAME");
+                        System.out.println(first_name + " " + last_name);
+                        return (first_name + " " + last_name);
+                    }
+                });
+        System.out.println(allNames.toString());
+     */
