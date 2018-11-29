@@ -77,7 +77,11 @@ public class DoctorController {
         DoctorValidator doctorValidator = new DoctorValidator(doctor);
         model.addAttribute("validation", doctorValidator);
         if(doctorValidator.isValid()){
-            this.jdbcTemplate.update(doctorValidator.getUpdateMessage());
+            try {
+                this.jdbcTemplate.update(doctorValidator.getUpdateMessage());
+            }catch(DataAccessException d){
+                System.err.println("****CAUGHT ERROR****");
+            }
             System.err.println("executed update query");
         }
         return "resultDoctor";
