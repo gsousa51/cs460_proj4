@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import Model.Doctor;
-
+import Validator.DoctorValidator;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -47,19 +47,10 @@ public class DoctorController {
         return "updateDoctor";
     }
     @PostMapping("/addDoctor")
-    public String doctorAdd(@ModelAttribute Doctor doctor) {
+    public String doctorAdd(Model model, @ModelAttribute Doctor doctor) {
+        DoctorValidator doctorValidator = new DoctorValidator(doctor);
         //TODO: Add business logic here
-        List<String> allNames = this.jdbcTemplate.query(
-                "select * from aswindle.doctor",
-                new RowMapper<String>() {
-                    public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        long first_name = rs.getLong("DOB");
-                        String last_name = rs.getString("L_NAME");
-                        System.out.println(first_name + " " + last_name);
-                        return (first_name + " " + last_name);
-                    }
-                });
-        System.out.println(allNames.toString());
+
         return "resultDoctor";
     }
 
