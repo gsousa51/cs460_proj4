@@ -32,14 +32,14 @@ public class DoctorValidator {
     public String getInsertMessage(){
         String insertMessage = "INSERT INTO aswindle.doctor(";
         insertMessage = insertMessage.concat(doctor.getID()+",");
-        insertMessage = insertMessage.concat(doctor.getlName()+",");
-        insertMessage = insertMessage.concat(doctor.getfName()+",");
+        insertMessage = insertMessage.concat("'" + doctor.getlName()+ "',");
+        insertMessage = insertMessage.concat("'" + doctor.getfName()+ "',");
         insertMessage = insertMessage.concat(doctor.getDOB().getTime()+",");
         if(doctor.getStatus().equals("")){
             insertMessage = insertMessage.concat("NULL,");
         }
         else{
-            insertMessage = insertMessage.concat(doctor.getStatus()+",");
+            insertMessage = insertMessage.concat("'" + doctor.getStatus()+"',");
 
         }
         if(doctor.isEmptyDeptID()){
