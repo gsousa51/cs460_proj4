@@ -60,18 +60,18 @@ public class DoctorValidator {
         updateMessage = updateMessage.concat(",\n");
 
         if(doctor.isEmptyDeptID()){
-            updateMessage = updateMessage.concat("DeptID = NULL");
+            updateMessage = updateMessage.concat("Dept_ID = NULL");
         }
         else{
-            updateMessage = updateMessage.concat("DeptID = " + doctor.getDeptID());
+            updateMessage = updateMessage.concat("Dept_ID = " + doctor.getDeptID());
         }
         updateMessage = updateMessage.concat(",\n");
 
         if(doctor.isEmptyOffice()){
-            updateMessage = updateMessage.concat("office = NULL");
+            updateMessage = updateMessage.concat("Office = NULL");
         }
         else{
-            updateMessage = updateMessage.concat("office = " + doctor.getOffice());
+            updateMessage = updateMessage.concat("Office = " + doctor.getOffice());
         }
         updateMessage = updateMessage.concat(",\n");
 
