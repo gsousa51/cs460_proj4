@@ -65,7 +65,7 @@ public class DoctorValidator {
         else{
             updateMessage = updateMessage.concat("Dept_ID = " + doctor.getDeptID());
         }
-        updateMessage = updateMessage.concat(",\n");
+        updateMessage = updateMessage.concat("\n");
 
         if(doctor.isEmptyOffice()){
             updateMessage = updateMessage.concat("Office = NULL");
