@@ -39,27 +39,35 @@ public class AppointmentController {
     }
     @PostMapping("/addAppointment")
     public String appointmentAdd(Model model, @ModelAttribute Appointment appointment) {
-        model.addAttribute("appointmentValidator", new AppointmentValidator(appointment));
+        AppointmentValidator validator = new AppointmentValidator(appointment);
+        validator.validateAddAppointment();
+        model.addAttribute("appointmentValidator", validator);
         System.err.println("Added validator");
-        jdbcTemplate.update("insert into aswindle.appointment values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                appointment.getAID(), appointment.getPID(), appointment.getDID(), appointment.getReason(),
-                appointment.getApptDate().getTime(), appointment.getAdmission().getTime(),
-                appointment.getExpDischarge().getTime(), appointment.getActDischarge().getTime(),
-                appointment.getRoom(), appointment.getTreatment());
-        //TODO: Add business logic here
+        if(validator.isValid()) {
+            jdbcTemplate.update("insert into aswindle.appointment values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    appointment.getAID(), appointment.getPID(), appointment.getDID(), appointment.getReason(),
+                    appointment.getApptDate().getTime(), appointment.getAdmission().getTime(),
+                    appointment.getExpDischarge().getTime(), appointment.getActDischarge().getTime(),
+                    appointment.getRoom(), appointment.getTreatment());
+        }
         return "resultAppointment";
     }
 
     @PostMapping("/updateAppointment")
     public String appointmentUpdate(Model model, @ModelAttribute Appointment appointment){
-        model.addAttribute("appointmentValidator", new AppointmentValidator(appointment));
+        AppointmentValidator validator = new AppointmentValidator(appointment);
+        validator.validateUpdateAppointment();
+        model.addAttribute("appointmentValidator", validator);
         // Not PID, AID, reason, appt_date
-        jdbcTemplate.update("update aswindle.appointment " +
-                        "set DID = ?, admission = ?, exp_discharge = ?, act_discharge = ?, room = ?, treatment = ?" +
-                        "where AID = ?",
-                appointment.getDID(), appointment.getAdmission().getTime(),
-                appointment.getExpDischarge().getTime(), appointment.getActDischarge().getTime(),
-                appointment.getRoom(), appointment.getTreatment(), appointment.getAID());
+        if(validator.isValid()) {
+            jdbcTemplate.update("update aswindle.appointment " +
+                            "set DID = ?, admission = ?, exp_discharge = ?, act_discharge = ?, room = ?, treatment = ?" +
+
+                            "where AID = ?",
+                    appointment.getDID(), appointment.getAdmission().getTime(),
+                    appointment.getExpDischarge().getTime(), appointment.getActDischarge().getTime(),
+                    appointment.getRoom(), appointment.getTreatment(), appointment.getAID());
+        }
         return "resultAppointment";
     }
 }
