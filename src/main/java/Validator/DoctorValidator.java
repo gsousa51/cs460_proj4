@@ -17,25 +17,50 @@ public class DoctorValidator {
     private Doctor doctor;
     private boolean valid;
     private String updateMessage;
-    @Autowired
-    private DataSource dataSource;
-    private JdbcTemplate jdbcTemplate;
-
-    @PostConstruct
-    private void postConstruct() {
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-
-
+    private String insertMessage;
     public DoctorValidator(Doctor doctor){
         this.doctor = doctor;
         this.valid = true;
-        this.updateMessage = getUpdate();
+
         validate();
 
     }
 
-    private String getUpdate(){
+    /*
+    Status, dept_ID, office
+     */
+    public String getInsertMessage(){
+        String insertMessage = "INSERT INTO aswindle.doctor(";
+        insertMessage = insertMessage.concat(doctor.getID()+",");
+        insertMessage = insertMessage.concat(doctor.getlName()+",");
+        insertMessage = insertMessage.concat(doctor.getfName()+",");
+        insertMessage = insertMessage.concat(doctor.getDOB().getTime()+",");
+        if(doctor.getStatus().equals("")){
+            insertMessage = insertMessage.concat("NULL,");
+        }
+        else{
+            insertMessage = insertMessage.concat(doctor.getStatus()+",");
+
+        }
+        if(doctor.isEmptyDeptID()){
+            insertMessage = insertMessage.concat("NULL,");
+        }
+        else{
+            insertMessage = insertMessage.concat(doctor.getDeptID()+",");
+
+        }
+        if(doctor.isEmptyOffice()){
+            insertMessage = insertMessage.concat("NULL");
+        }
+        else{
+            insertMessage = insertMessage.concat(""+doctor.getOffice());
+
+        }
+        insertMessage = insertMessage.concat(")");
+
+        return insertMessage;
+    }
+    public String getUpdateMessage(){
         String updateMessage = "UPDATE aswindle.Doctor \nSET ";
         if(doctor.getlName().equals("")){
             updateMessage = updateMessage.concat("L_Name = NULL");
@@ -95,7 +120,4 @@ public class DoctorValidator {
         this.updateMessage = updateMessage;
     }
 
-    public String getUpdateMessage() {
-        return updateMessage;
-    }
 }

@@ -51,8 +51,11 @@ public class DoctorController {
     @PostMapping("/addDoctor")
     public String doctorAdd(Model model, @ModelAttribute Doctor doctor) {
         DoctorValidator doctorValidator = new DoctorValidator(doctor);
-        //TODO: Add business logic here
-
+        model.addAttribute(doctorValidator);
+        if(doctorValidator.isValid()) {
+            this.jdbcTemplate.update(doctorValidator.getInsertMessage());
+            System.err.println("Insert Query: " + doctorValidator.getInsertMessage());
+        }
         return "resultDoctor";
     }
 
