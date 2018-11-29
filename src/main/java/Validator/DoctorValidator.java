@@ -29,7 +29,7 @@ public class DoctorValidator {
 
     public DoctorValidator(Doctor doctor){
         this.doctor = doctor;
-        this.valid = false;
+        this.valid = true;
         this.updateMessage = getUpdate();
         validate();
 
