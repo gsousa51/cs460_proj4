@@ -30,7 +30,7 @@ public class DoctorValidator {
     Status, dept_ID, office
      */
     public String getInsertMessage(){
-        String insertMessage = "INSERT INTO aswindle.doctor(";
+        String insertMessage = "INSERT INTO aswindle.doctor VALUES(";
         insertMessage = insertMessage.concat(doctor.getID()+",");
         insertMessage = insertMessage.concat("'" + doctor.getlName()+ "',");
         insertMessage = insertMessage.concat("'" + doctor.getfName()+ "',");
