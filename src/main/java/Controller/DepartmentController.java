@@ -25,6 +25,11 @@ public class DepartmentController {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    @GetMapping("/addDepartment")
+    public String addDepartmentForm(Model model) {
+        model.addAttribute("department", new Department());
+        return "addDepartment";
+    }
 
     @GetMapping("/updateDepartment")
     public String updateDepartmentForm(Model model) {
@@ -32,10 +37,19 @@ public class DepartmentController {
         return "updateDepartment";
     }
 
+    @PostMapping("/addDepartment")
+    public String departmentAdd(@ModelAttribute Department department){
+        jdbcTemplate.update("insert into aswindle.department values (?, ?, ?)",
+               department.getID(), department.getName(), department.getOffice());
+        return "resultDepartment";
+    }
+
     @PostMapping("/updateDepartment")
     public String departmentUpdate(@ModelAttribute Department department){
-        //TODO: We need to figure out how to handle the fields were left empty
-        //Most likely answer is
+        jdbcTemplate.update("update aswindle.department " +
+                        "set dept_name = ?, office = ? " +
+                        "where dept_id = ?",
+                department.getName(), department.getOffice(), department.getID());
         return "resultDepartment";
     }
 }

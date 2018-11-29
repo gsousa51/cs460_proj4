@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import Model.CashData;
 import Model.Validator;
+
 @Controller
 public class CashDataController {
 
@@ -36,19 +37,24 @@ public class CashDataController {
         model.addAttribute("cashData", new CashData());
         return "updateCashData";
     }
+
     @PostMapping("/addCashData")
     public String cashDataAdd(Model model, @ModelAttribute CashData cashData) {
         model.addAttribute("validator", new Validator(cashData));
-        //TODO: Add business logic here
+        jdbcTemplate.update("insert into aswindle.cash_data values (?, ?, ?, ?, ?, ?, ?)",
+                cashData.getXactID(), cashData.getEID(), cashData.getPID(), cashData.getAmount(),
+                cashData.getDueDate(), cashData.getStatus(), cashData.getPaidDate());
         return "resultCashData";
     }
 
     @PostMapping("/updateCashData")
-    public String cashDataUpdate(Model model, @ModelAttribute CashData cashData){
+    public String cashDataUpdate(Model model, @ModelAttribute CashData cashData) {
         model.addAttribute("validator", new Validator(cashData));
-
-        //TODO: We need to figure out how to handle the fields were left empty
-        //Most likely answer is
+        jdbcTemplate.update("update aswindle.cash_data " +
+                        "set eid = ?, pid = ?, amount = ?, due = ?, status = ?, paid = ? " +
+                        "where xact_id = ?",
+                cashData.getEID(), cashData.getPID(), cashData.getAmount(),
+                cashData.getDueDate(), cashData.getStatus(), cashData.getPaidDate(), cashData.getXactID());
         return "resultCashData";
     }
 }
