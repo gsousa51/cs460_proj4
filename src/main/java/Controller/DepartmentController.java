@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import Model.Department;
+import Model.DepartmentValidator;
 
 @Controller
 public class DepartmentController {
@@ -39,17 +40,25 @@ public class DepartmentController {
 
     @PostMapping("/addDepartment")
     public String departmentAdd(@ModelAttribute Department department){
-        jdbcTemplate.update("insert into aswindle.department values (?, ?, ?)",
-               department.getID(), department.getName(), department.getOffice());
+        DepartmentValidator validator = new DepartmentValidator(department);
+        validator.validateAddDepartment();
+        if(validator.isValid()) {
+            jdbcTemplate.update("insert into aswindle.department values (?, ?, ?)",
+                    department.getID(), department.getName(), department.getOffice());
+        }
         return "resultDepartment";
     }
 
     @PostMapping("/updateDepartment")
     public String departmentUpdate(@ModelAttribute Department department){
-        jdbcTemplate.update("update aswindle.department " +
-                        "set dept_name = ?, office = ? " +
-                        "where dept_id = ?",
-                department.getName(), department.getOffice(), department.getID());
+        DepartmentValidator validator = new DepartmentValidator(department);
+        validator.validateUpdateDepartment();
+        if(validator.isValid()) {
+            jdbcTemplate.update("update aswindle.department " +
+                            "set dept_name = ?, office = ? " +
+                            "where dept_id = ?",
+                    department.getName(), department.getOffice(), department.getID());
+        }
         return "resultDepartment";
     }
 }
