@@ -71,7 +71,7 @@ public class PharmacistController {
     public String pharmacistDelete(Model model, @ModelAttribute Pharmacist pharmacist){
         Object[] ID = {pharmacist.getID()};
         try {
-            this.jdbcTemplate.update("DELETE from aswindle.Pharmacist WHERE NID = ?", ID);
+            this.jdbcTemplate.update("DELETE from aswindle.Pharmacist WHERE PHID = ?", ID);
         }
         catch(DataAccessException d){
             d.printStackTrace();
