@@ -21,7 +21,7 @@ public class DoctorValidator {
     private boolean validInsert;
     public DoctorValidator(Doctor doctor){
         this.doctor = doctor;
-        this.insertMessage = createInsertMessage();
+        this.validInsert = true;
         this.updateMessage = createUpdateMessage();
     }
 
@@ -123,7 +123,7 @@ public class DoctorValidator {
     }
 
     public String getInsertMessage() {
-        return insertMessage;
+        return createInsertMessage();
     }
 
     public void setInsertMessage(String insertMessage) {
