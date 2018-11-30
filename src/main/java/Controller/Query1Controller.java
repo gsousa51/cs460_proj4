@@ -38,7 +38,7 @@ public class Query1Controller {
     }
 
     @PostMapping("/query1")
-    public String appointmentAdd(Model model, @ModelAttribute Query1 query) {
+    public String query1Submit(Model model, @ModelAttribute Query1 query) {
         List<String> allNames = this.jdbcTemplate.query(
                 "SELECT p.pid, p.f_name, p.l_name, p.gender, p.dob, a.appt_date, a.reason, a.treatment, d.f_name AS " +
                         "d_f, d.l_name AS d_l\n" +
@@ -55,7 +55,6 @@ public class Query1Controller {
                         String first_name = rs.getString("f_name");
                         String last_name = rs.getString("l_name");
                         String gender = rs.getString("gender");
-                        // TODO: switch date longs back to human-readable dates
                         Date dob = new Date(rs.getLong("dob"));
                         Date appt_date = new Date(rs.getLong("appt_date"));
                         String reason = rs.getString("reason");
