@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Query 1 Input</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Patient Lookup</h1>
+<form action="#" th:action="@{/query1}" th:object="${query1}" method="post">
+    <p>First Name: <input type="text" required th:field="*{fName}" /></p>
+    <p>Last Name: <input type="text" required th:field="*{lName}" /></p>
+    <p>DOB: <input type="date" required th:field="*{DOB}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
+</body>
+</html>
