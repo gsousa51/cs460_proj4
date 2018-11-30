@@ -70,8 +70,8 @@ public class DoctorController {
 
     @PostMapping("/deleteDoctor")
     public String doctorDelete(@ModelAttribute Doctor doctor){
-
-        this.jdbcTemplate.update("DELETE from aswindle.Doctor WHERE DID = ?", doctor.getID());
+        Object[] ID = {doctor.getID()};
+        this.jdbcTemplate.update("DELETE from aswindle.Doctor WHERE DID = ?", ID);
         return "resultDoctor";
     }
 
