@@ -13,7 +13,7 @@ public class Patient {
     private java.sql.Date DOB;
     private String address;
 
-    private int phone;
+    private long phone;
     private String s_phone;
     private boolean emptyPhone;
 
@@ -86,7 +86,7 @@ public class Patient {
         this.address = address;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
@@ -104,7 +104,7 @@ public class Patient {
             this.emptyPhone = true;
         }
         else{
-            this.phone = (int)Long.parseLong(s_phone);
+            this.phone = Long.parseLong(s_phone);
         }
     }
 
