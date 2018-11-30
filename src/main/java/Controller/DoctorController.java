@@ -60,10 +60,12 @@ public class DoctorController {
 
             }catch(DataAccessException d){
                 System.err.println("*****CAUGHT ERROR*****");
+                return "resultError";
             }
         }
         else{
             System.err.println("Invalid query");
+            return "resultError";
         }
         return "resultDoctor";
     }
@@ -76,6 +78,7 @@ public class DoctorController {
         }
         catch(DataAccessException d){
             d.printStackTrace();
+            return "resultError";
         }
         return "resultDoctor";
     }
