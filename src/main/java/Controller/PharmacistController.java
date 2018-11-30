@@ -1,5 +1,7 @@
 package Controller;
 
+import Validator.PharmacistValidator;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,23 +46,58 @@ public class PharmacistController {
     }
 
     @PostMapping("/addPharmacist")
-    public String pharmacistAdd(@ModelAttribute Pharmacist pharmacist) {
-        //TODO: Add business logic here change to resultPharmacist.
+    public String pharmacistAdd(Model model, @ModelAttribute Pharmacist pharmacist) {
+        PharmacistValidator PharmacistValidator = new PharmacistValidator(pharmacist);
+        model.addAttribute(PharmacistValidator);
+        if(PharmacistValidator.isValidInsert()) {
+            try {
+                this.jdbcTemplate.update(PharmacistValidator.getInsertMessage());
+            }catch(DataAccessException d){
+                System.err.println("*****CAUGHT ERROR*****");
+                d.printStackTrace();
+                return "resultError";
+            }
+        }
+        else{
+            System.err.println("Invalid query");
+            return "resultError";
+        }
         return "resultPharmacist";
     }
 
 
 
     @PostMapping("/deletePharmacist")
-    public String pharmacistDelete(@ModelAttribute Pharmacist pharmacist){
-        //TODO: Add business logic here
+    public String pharmacistDelete(Model model, @ModelAttribute Pharmacist pharmacist){
+        Object[] ID = {pharmacist.getID()};
+        try {
+            this.jdbcTemplate.update("DELETE from aswindle.Pharmacist WHERE NID = ?", ID);
+        }
+        catch(DataAccessException d){
+            d.printStackTrace();
+            return "resultError";
+        }
         return "resultPharmacist";
     }
 
     @PostMapping("/updatePharmacist")
-    public String pharmacistUpdate(@ModelAttribute Pharmacist pharmacist){
-        //TODO: We need to figure out how to handle the fields were left empty
-        //Most likely answer is check for "" in the strings.
+    public String pharmacistUpdate(Model model, @ModelAttribute Pharmacist pharmacist){
+        PharmacistValidator PharmacistValidator = new PharmacistValidator(pharmacist);
+        model.addAttribute("validation", PharmacistValidator);
+
+        if(PharmacistValidator.isValidUpdate()){
+            try {
+                this.jdbcTemplate.update(PharmacistValidator.getUpdateMessage());
+            }catch(DataAccessException d){
+                //TODO: Send user to an error page.
+                System.err.println("****CAUGHT ERROR****");
+                d.printStackTrace();
+            }
+            System.err.println("executed update query");
+        }
+        else{
+            System.err.println("Invalid update message");
+        }
         return "resultPharmacist";
     }
 
