@@ -53,7 +53,7 @@ public class DoctorController {
     public String doctorAdd(Model model, @ModelAttribute Doctor doctor) {
         DoctorValidator doctorValidator = new DoctorValidator(doctor);
         model.addAttribute(doctorValidator);
-        if(doctorValidator.isValid()) {
+        if(doctorValidator.isValidInsert()) {
             try {
 
                 this.jdbcTemplate.update(doctorValidator.getInsertMessage());
@@ -62,16 +62,16 @@ public class DoctorController {
                 System.err.println("*****CAUGHT ERROR*****");
             }
         }
+        else{
+            System.err.println("Invalid query");
+        }
         return "resultDoctor";
     }
 
     @PostMapping("/deleteDoctor")
     public String doctorDelete(@ModelAttribute Doctor doctor){
-        try{
-            this.jdbcTemplate.update("DELETE from aswindle.Doctor WHERE DID = ?", doctor.getID());
-        }catch(DataAccessException d){
-            System.err.println("Error with deleting from the database?");
-        }
+
+        this.jdbcTemplate.update("DELETE from aswindle.Doctor WHERE DID = ?", doctor.getID());
         return "resultDoctor";
     }
 
@@ -80,7 +80,7 @@ public class DoctorController {
         DoctorValidator doctorValidator = new DoctorValidator(doctor);
         model.addAttribute("validation", doctorValidator);
 
-        if(doctorValidator.isValid()){
+        if(doctorValidator.isValidUpdate()){
             try {
                 this.jdbcTemplate.update(doctorValidator.getUpdateMessage());
             }catch(DataAccessException d){
@@ -88,6 +88,9 @@ public class DoctorController {
                 System.err.println("****CAUGHT ERROR****");
             }
             System.err.println("executed update query");
+        }
+        else{
+            System.err.println("Invalid update message");
         }
         return "resultDoctor";
     }

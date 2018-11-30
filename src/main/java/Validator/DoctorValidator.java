@@ -15,23 +15,22 @@ import java.util.List;
 public class DoctorValidator {
 
     private Doctor doctor;
-    private boolean valid;
     private String updateMessage;
     private String insertMessage;
+    private boolean validUpdate;
+    private boolean validInsert;
     public DoctorValidator(Doctor doctor){
         this.doctor = doctor;
-        this.valid = false;
-
-        validate();
-
+        this.insertMessage = createInsertMessage();
+        this.updateMessage = createUpdateMessage();
     }
 
     /*
     Status, dept_ID, office
      */
-    public String getInsertMessage(){
+    public String createInsertMessage(){
         //TODO: Do we want to do this?
-        this.valid = true;
+
         String insertMessage = "INSERT INTO aswindle.doctor VALUES(";
         insertMessage = insertMessage.concat(doctor.getID()+",");
         insertMessage = insertMessage.concat("'" + doctor.getlName()+ "',");
@@ -63,68 +62,87 @@ public class DoctorValidator {
         return insertMessage;
     }
 
-    public String getUpdateMessage(){
+    public String createUpdateMessage(){
         String updateMessage = "UPDATE aswindle.Doctor \nSET ";
 
         if(!doctor.getlName().equals("")){
-            valid = true;
+            validUpdate = true;
             updateMessage = updateMessage.concat("L_Name = '" + doctor.getlName()+"'");
             updateMessage = updateMessage.concat("\n");
         }
         if(!doctor.getfName().equals("")){
-            if(valid){
+            if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
             updateMessage =  updateMessage.concat("F_Name = '" + doctor.getfName()+"'");
             updateMessage =  updateMessage.concat("\n");
-            valid  = true;
+            validUpdate  = true;
         }
 
         if(!doctor.getStatus().equals("")){
-            if(valid){
+            if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
             updateMessage = updateMessage.concat("Status = '" + doctor.getStatus() + "'");
             updateMessage = updateMessage.concat("\n");
-            valid = true;
+            validUpdate = true;
         }
 
         if(!doctor.isEmptyDeptID()){
-            if(valid){
+            if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
             updateMessage = updateMessage.concat("Dept_ID = " + doctor.getDeptID());
             updateMessage = updateMessage.concat("\n");
-            valid = true;
+            validUpdate = true;
         }
 
         if(!doctor.isEmptyOffice()){
-            if(valid){
+            if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
             updateMessage = updateMessage.concat("Office = " + doctor.getOffice());
             updateMessage = updateMessage.concat("\n");
-            valid = true;
+            validUpdate = true;
         }
 
         updateMessage = updateMessage.concat(" WHERE DID = " + doctor.getID() + "\n");
         return updateMessage;
     }
 
-    private void validate(){
+    private void validUpdateate(){
 
-    }
-
-    public boolean isValid() {
-        return valid;
-    }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
     }
 
     public void setUpdateMessage(String updateMessage) {
         this.updateMessage = updateMessage;
     }
 
+    public String getUpdateMessage() {
+        return updateMessage;
+    }
+
+    public String getInsertMessage() {
+        return insertMessage;
+    }
+
+    public void setInsertMessage(String insertMessage) {
+        this.insertMessage = insertMessage;
+    }
+
+    public boolean isValidUpdate() {
+        return validUpdate;
+    }
+
+    public void setValidUpdate(boolean validUpdate) {
+        this.validUpdate = validUpdate;
+    }
+
+    public boolean isValidInsert() {
+        return validInsert;
+    }
+
+    public void setValidInsert(boolean validInsert) {
+        this.validInsert = validInsert;
+    }
 }
