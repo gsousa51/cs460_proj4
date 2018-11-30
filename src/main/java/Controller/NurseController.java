@@ -54,6 +54,7 @@ public class NurseController {
                 this.jdbcTemplate.update(nurseValidator.getInsertMessage());
             }catch(DataAccessException d){
                 System.err.println("*****CAUGHT ERROR*****");
+                d.printStackTrace();
                 return "resultError";
             }
         }
@@ -90,6 +91,7 @@ public class NurseController {
             }catch(DataAccessException d){
                 //TODO: Send user to an error page.
                 System.err.println("****CAUGHT ERROR****");
+                d.printStackTrace();
             }
             System.err.println("executed update query");
         }
