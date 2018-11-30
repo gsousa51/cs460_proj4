@@ -1,7 +1,7 @@
 package Validator;
 
 import Model.Doctor;
-import Model.Nurse;
+import Model.Patient;
 import Model.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,16 +13,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class NurseValidator {
+public class PatientValidator {
 
-    private Nurse nurse;
+    private Patient patient;
     private String updateMessage;
     private String insertMessage;
     private boolean validUpdate;
     private boolean validInsert;
 
-    public NurseValidator(Nurse nurse){
-        this.nurse = nurse;
+    public PatientValidator(Patient patient){
+        this.patient = patient;
         this.validInsert = true;
         this.updateMessage = createUpdateMessage();
     }
@@ -33,24 +33,29 @@ public class NurseValidator {
     public String createInsertMessage(){
         //TODO: Do we want to do this?
         this.validInsert = true;
-        String insertMessage = "INSERT INTO aswindle.nurse VALUES(";
-        insertMessage = insertMessage.concat(nurse.getID()+",");
-        insertMessage = insertMessage.concat("'" + nurse.getlName()+ "',");
-        insertMessage = insertMessage.concat("'" + nurse.getfName()+ "',");
-        insertMessage = insertMessage.concat(nurse.getDOB().getTime()+",");
-        if(nurse.isEmptyRoom()){
+        String insertMessage = "INSERT INTO aswindle.patient VALUES(";
+        insertMessage = insertMessage.concat(patient.getID()+",");
+        insertMessage = insertMessage.concat("'" + patient.getlName()+ "',");
+        insertMessage = insertMessage.concat("'" + patient.getfName()+ "',");
+        if(patient.getGender().equals("")){
             insertMessage = insertMessage.concat("NULL,");
         }
         else{
-            insertMessage = insertMessage.concat(nurse.getRoom()+",");
-
+            insertMessage = insertMessage.concat("'" + patient.getGender()+"',");
         }
-        if(nurse.isEmptyDeptID()){
+        insertMessage = insertMessage.concat(patient.getDOB().getTime()+",");
+        if(patient.getAddress().equals("")){
             insertMessage = insertMessage.concat("NULL,");
         }
         else{
-            insertMessage = insertMessage.concat(nurse.getDeptID()+"");
+            insertMessage = insertMessage.concat("'" + patient.getAddress()+"',");
 
+        }
+        if(patient.isEmptyPhone()){
+            insertMessage = insertMessage.concat("NULL");
+        }
+        else{
+            insertMessage = insertMessage.concat(patient.getPhone()+"");
         }
 
         insertMessage = insertMessage.concat(")");
@@ -59,46 +64,52 @@ public class NurseValidator {
     }
 
     public String createUpdateMessage(){
-        String updateMessage = "UPDATE aswindle.Nurse \nSET ";
+        String updateMessage = "UPDATE aswindle.Patient \nSET ";
 
-        if(!nurse.getlName().equals("")){
+        if(!patient.getlName().equals("")){
             validUpdate = true;
-            updateMessage = updateMessage.concat("L_Name = '" + nurse.getlName()+"'");
+            updateMessage = updateMessage.concat("L_Name = '" + patient.getlName()+"'");
             updateMessage = updateMessage.concat("\n");
         }
-        if(!nurse.getfName().equals("")){
+        if(!patient.getfName().equals("")){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
-            updateMessage =  updateMessage.concat("F_Name = '" + nurse.getfName()+"'");
+            updateMessage =  updateMessage.concat("F_Name = '" + patient.getfName()+"'");
             updateMessage =  updateMessage.concat("\n");
             validUpdate  = true;
         }
 
-        if(!nurse.isEmptyDeptID()){
+        if(!patient.getGender().equals("")){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
-            updateMessage = updateMessage.concat("Dept_ID = " + nurse.getDeptID());
+            updateMessage = updateMessage.concat("Gender = '" + patient.getGender()+"'");
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
 
-        if(!nurse.isEmptyRoom()){
+        if(!patient.getAddress().equals("")){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
-            updateMessage = updateMessage.concat("Room = " + nurse.getRoom());
+            updateMessage = updateMessage.concat("Address = '" + patient.getAddress() + "'");
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
 
-        updateMessage = updateMessage.concat(" WHERE NID = " + nurse.getID() + "\n");
+        if(!patient.isEmptyPhone()){
+            if(validUpdate){
+                updateMessage = updateMessage.concat(",");
+            }
+            updateMessage = updateMessage.concat("Phone = " + patient.getPhone());
+            updateMessage = updateMessage.concat("\n");
+            validUpdate = true;
+        }
+
+
+        updateMessage = updateMessage.concat(" WHERE PID = " + patient.getID() + "\n");
         return updateMessage;
-    }
-
-    private void validUpdateate(){
-
     }
 
     public void setUpdateMessage(String updateMessage) {
