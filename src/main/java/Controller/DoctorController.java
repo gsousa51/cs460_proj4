@@ -68,7 +68,7 @@ public class DoctorController {
     @PostMapping("/deleteDoctor")
     public String doctorDelete(@ModelAttribute Doctor doctor){
         try{
-            this.jdbcTemplate.update("DELETE * from aswindle.Doctor WHERE DID = ?", doctor.getID());
+            this.jdbcTemplate.update("DELETE from aswindle.Doctor WHERE DID = ?", doctor.getID());
         }catch(DataAccessException d){
             System.err.println("Error with deleting from the database?");
         }
