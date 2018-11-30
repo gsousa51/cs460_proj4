@@ -68,7 +68,7 @@ public class PatientController {
     public String patientDelete(@ModelAttribute Patient patient){
         Object[] ID = {patient.getID()};
         try {
-            this.jdbcTemplate.update("DELETE from aswindle.Patient WHERE NID = ?", ID);
+            this.jdbcTemplate.update("DELETE from aswindle.Patient WHERE PID = ?", ID);
         }
         catch(DataAccessException d){
             d.printStackTrace();

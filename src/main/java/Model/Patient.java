@@ -104,7 +104,7 @@ public class Patient {
             this.emptyPhone = true;
         }
         else{
-            this.phone = Integer.parseInt(s_phone);
+            this.phone = (int)Long.parseLong(s_phone);
         }
     }
 
