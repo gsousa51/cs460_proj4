@@ -42,14 +42,14 @@ public class NurseValidator {
             insertMessage = insertMessage.concat("NULL");
         }
         else{
-            insertMessage = insertMessage.concat(""+nurse.getRoom());
+            insertMessage = insertMessage.concat(nurse.getRoom()+",");
 
         }
         if(nurse.isEmptyDeptID()){
             insertMessage = insertMessage.concat("NULL,");
         }
         else{
-            insertMessage = insertMessage.concat(nurse.getDeptID()+",");
+            insertMessage = insertMessage.concat(nurse.getDeptID()+"");
 
         }
 
