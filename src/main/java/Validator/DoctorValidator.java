@@ -20,7 +20,7 @@ public class DoctorValidator {
     private String insertMessage;
     public DoctorValidator(Doctor doctor){
         this.doctor = doctor;
-        this.valid = true;
+        this.valid = false;
 
         validate();
 
@@ -30,7 +30,8 @@ public class DoctorValidator {
     Status, dept_ID, office
      */
     public String getInsertMessage(){
-
+        //TODO: Do we want to do this?
+        this.valid = true;
         String insertMessage = "INSERT INTO aswindle.doctor VALUES(";
         insertMessage = insertMessage.concat(doctor.getID()+",");
         insertMessage = insertMessage.concat("'" + doctor.getlName()+ "',");

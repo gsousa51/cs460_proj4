@@ -67,8 +67,11 @@ public class DoctorController {
 
     @PostMapping("/deleteDoctor")
     public String doctorDelete(@ModelAttribute Doctor doctor){
-        //TODO: Add business logic here
-        System.out.println("Hit the delete endpoint");
+        try{
+            this.jdbcTemplate.update("DELETE from aswindle.Doctor WHERE DID = ?", doctor.getID());
+        }catch(DataAccessException d){
+            System.err.println("Error with deleting from the database?");
+        }
         return "resultDoctor";
     }
 
@@ -76,10 +79,12 @@ public class DoctorController {
     public String doctorUpdate(Model model, @ModelAttribute Doctor doctor){
         DoctorValidator doctorValidator = new DoctorValidator(doctor);
         model.addAttribute("validation", doctorValidator);
+
         if(doctorValidator.isValid()){
             try {
                 this.jdbcTemplate.update(doctorValidator.getUpdateMessage());
             }catch(DataAccessException d){
+                //TODO: Send user to an error page.
                 System.err.println("****CAUGHT ERROR****");
             }
             System.err.println("executed update query");
