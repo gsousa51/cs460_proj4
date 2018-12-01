@@ -1,5 +1,7 @@
 package Controller;
 
+import Validator.CashDataValidator;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,6 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import Model.CashData;
-import Model.CashDataValidator;
 
 @Controller
 public class CashDataController {
@@ -40,29 +41,43 @@ public class CashDataController {
 
     @PostMapping("/addCashData")
     public String cashDataAdd(Model model, @ModelAttribute CashData cashData) {
-        CashDataValidator validator = new CashDataValidator(cashData);
-        validator.validateAddCashData();
-        model.addAttribute("validator", validator);
-        if(validator.isValid()) {
-            jdbcTemplate.update("insert into aswindle.cash_data values (?, ?, ?, ?, ?, ?, ?)",
-                    cashData.getXactID(), cashData.getEID(), cashData.getPID(), cashData.getAmount(),
-                    cashData.getDueDate().getTime(), cashData.getStatus(), cashData.getPaidDate().getTime());
+        CashDataValidator cashDataValidator = new CashDataValidator(cashData);
+        model.addAttribute(cashDataValidator);
+        if(cashDataValidator.isValidInsert()) {
+            try {
+                this.jdbcTemplate.update(cashDataValidator.getInsertMessage());
+            }catch(DataAccessException d){
+                System.err.println("*****CAUGHT ERROR*****");
+                d.printStackTrace();
+                return "resultError";
+            }
+        }
+        else{
+            System.err.println("Invalid query");
+            return "resultError";
         }
         return "resultCashData";
     }
 
     @PostMapping("/updateCashData")
     public String cashDataUpdate(Model model, @ModelAttribute CashData cashData) {
-        CashDataValidator validator = new CashDataValidator(cashData);
-        validator.validateUpdateCashData();
-        model.addAttribute("validator", validator);
-        if(validator.isValid()) {
-            jdbcTemplate.update("update aswindle.cash_data " +
-                            "set eid = ?, pid = ?, amount = ?, due = ?, status = ?, paid = ? " +
-                            "where xact_id = ?",
-                    cashData.getEID(), cashData.getPID(), cashData.getAmount(),
-                    cashData.getDueDate().getTime(), cashData.getStatus(), cashData.getPaidDate().getTime(),
-                    cashData.getXactID());
+        CashDataValidator cashDataValidator = new CashDataValidator(cashData);
+        model.addAttribute("validation", cashDataValidator);
+
+        if(cashDataValidator.isValidUpdate()){
+            try {
+                this.jdbcTemplate.update(cashDataValidator.getUpdateMessage());
+            }catch(DataAccessException d){
+                //TODO: Send user to an error page.
+                System.err.println("****CAUGHT ERROR****");
+                d.printStackTrace();
+                return "resultError";
+            }
+            System.err.println("executed update query");
+        }
+        else{
+            System.err.println("Invalid update message");
+            return "resultError";
         }
         return "resultCashData";
     }
