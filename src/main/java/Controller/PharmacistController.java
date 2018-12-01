@@ -92,11 +92,13 @@ public class PharmacistController {
                 //TODO: Send user to an error page.
                 System.err.println("****CAUGHT ERROR****");
                 d.printStackTrace();
+                return "resultError";
             }
             System.err.println("executed update query");
         }
         else{
             System.err.println("Invalid update message");
+            return "resultError";
         }
         return "resultPharmacist";
     }

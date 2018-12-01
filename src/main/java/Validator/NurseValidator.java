@@ -1,17 +1,6 @@
 package Validator;
 
-import Model.Doctor;
 import Model.Nurse;
-import Model.Validator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-
-import javax.annotation.PostConstruct;
-import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
 
 public class NurseValidator {
 
@@ -46,7 +35,7 @@ public class NurseValidator {
 
         }
         if(nurse.isEmptyDeptID()){
-            insertMessage = insertMessage.concat("NULL,");
+            insertMessage = insertMessage.concat("NULL");
         }
         else{
             insertMessage = insertMessage.concat(nurse.getDeptID()+"");

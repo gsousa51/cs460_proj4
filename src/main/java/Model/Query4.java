@@ -1,13 +1,13 @@
 package Model;
 
 public class Query4 {
-    private int EID;
+    private long EID;
 
-    public int getEID() {
+    public long getEID() {
         return EID;
     }
 
-    public void setEID(int EID) {
+    public void setEID(long EID) {
         this.EID = EID;
     }
 }

@@ -5,30 +5,30 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Staff {
-    private int ID;
+    private long ID;
     private String fName;
     private String lName;
     private java.sql.Date DOB;
 
-    private int salary;
+    private long salary;
     private String s_salary;
     private boolean emptySalary;
 
-    private int deptID;
+    private long deptID;
     private String s_deptID;
     private boolean emptyDeptID;
 
-    private int office;
+    private long office;
     private String s_office;
     private boolean emptyOffice;
 
     private String title;
 
-    public int getID() {
+    public long getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.ID = ID;
     }
 
@@ -69,7 +69,7 @@ public class Staff {
 
     }
 
-    public int getSalary() {
+    public long getSalary() {
         return salary;
     }
 
@@ -79,15 +79,15 @@ public class Staff {
             this.emptySalary = true;
         }
         else{
-            this.salary = Integer.parseInt(s_salary);
+            this.salary = Long.parseLong(s_salary);
         }
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(long salary) {
         this.salary = salary;
     }
 
-    public int getDeptID() {
+    public long getDeptID() {
         return deptID;
     }
 
@@ -97,19 +97,19 @@ public class Staff {
             this.emptyDeptID = true;
         }
         else{
-            this.deptID = Integer.parseInt(s_deptID);
+            this.deptID = Long.parseLong(s_deptID);
         }
     }
 
-    public void setDeptID(int deptID) {
+    public void setDeptID(long deptID) {
         this.deptID = deptID;
     }
 
-    public int getOffice() {
+    public long getOffice() {
         return office;
     }
 
-    public void setOffice(int office) {
+    public void setOffice(long office) {
         this.office = office;
     }
 
@@ -119,7 +119,7 @@ public class Staff {
             this.emptyOffice = true;
         }
         else{
-            this.office = Integer.parseInt(s_office);
+            this.office = Long.parseLong(s_office);
         }
     }
     public String getTitle() {

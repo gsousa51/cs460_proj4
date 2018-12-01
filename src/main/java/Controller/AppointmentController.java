@@ -1,5 +1,7 @@
 package Controller;
 
+import Validator.AppointmentValidator;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,6 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import Model.Appointment;
-import Model.AppointmentValidator;
 
 @Controller
 public class AppointmentController {
@@ -40,33 +41,43 @@ public class AppointmentController {
     @PostMapping("/addAppointment")
     public String appointmentAdd(Model model, @ModelAttribute Appointment appointment) {
         AppointmentValidator validator = new AppointmentValidator(appointment);
-        validator.validateAddAppointment();
-        model.addAttribute("appointmentValidator", validator);
-        System.err.println("Added validator");
-        if(validator.isValid()) {
-            jdbcTemplate.update("insert into aswindle.appointment values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                    appointment.getAID(), appointment.getPID(), appointment.getDID(), appointment.getReason(),
-                    appointment.getApptDate().getTime(), appointment.getAdmission().getTime(),
-                    appointment.getExpDischarge().getTime(), appointment.getActDischarge().getTime(),
-                    appointment.getRoom(), appointment.getTreatment());
+        AppointmentValidator appointmentValidator = new AppointmentValidator(appointment);
+        model.addAttribute(appointmentValidator);
+        if(appointmentValidator.isValidInsert()) {
+            try {
+                this.jdbcTemplate.update(appointmentValidator.getInsertMessage());
+            }catch(DataAccessException d){
+                System.err.println("*****CAUGHT ERROR*****");
+                d.printStackTrace();
+                return "resultError";
+            }
+        }
+        else{
+            System.err.println("Invalid query");
+            return "resultError";
         }
         return "resultAppointment";
     }
 
     @PostMapping("/updateAppointment")
     public String appointmentUpdate(Model model, @ModelAttribute Appointment appointment){
-        AppointmentValidator validator = new AppointmentValidator(appointment);
-        validator.validateUpdateAppointment();
-        model.addAttribute("appointmentValidator", validator);
-        // Not PID, AID, reason, appt_date
-        if(validator.isValid()) {
-            jdbcTemplate.update("update aswindle.appointment " +
-                            "set DID = ?, admission = ?, exp_discharge = ?, act_discharge = ?, room = ?, treatment = ?" +
+        AppointmentValidator appointmentValidator = new AppointmentValidator(appointment);
+        model.addAttribute("validation", appointmentValidator);
 
-                            "where AID = ?",
-                    appointment.getDID(), appointment.getAdmission().getTime(),
-                    appointment.getExpDischarge().getTime(), appointment.getActDischarge().getTime(),
-                    appointment.getRoom(), appointment.getTreatment(), appointment.getAID());
+        if(appointmentValidator.isValidUpdate()){
+            try {
+                this.jdbcTemplate.update(appointmentValidator.getUpdateMessage());
+            }catch(DataAccessException d){
+                //TODO: Send user to an error page.
+                System.err.println("****CAUGHT ERROR****");
+                d.printStackTrace();
+                return "resultError";
+            }
+            System.err.println("executed update query");
+        }
+        else{
+            System.err.println("Invalid update message");
+            return "resultError";
         }
         return "resultAppointment";
     }

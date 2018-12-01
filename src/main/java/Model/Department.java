@@ -1,20 +1,20 @@
 package Model;
 
 public class Department {
-    private int ID;
+    private long ID;
     private String name;
-    private int office;
+    private long office;
     private String s_office;
     private boolean emptyOffice;
 
     //TODO: The spec says we should be able to update the building name...
     private String buildingName;
 
-    public int getID() {
+    public long getID() {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.ID = ID;
     }
 
@@ -26,11 +26,11 @@ public class Department {
         this.name = name;
     }
 
-    public int getOffice() {
+    public long getOffice() {
         return office;
     }
 
-    public void setOffice(int office) {
+    public void setOffice(long office) {
         this.office = office;
     }
 
@@ -40,7 +40,7 @@ public class Department {
             this.emptyOffice = true;
         }
         else{
-            this.office = Integer.parseInt(s_office);
+            this.office = Long.parseLong(s_office);
         }
     }
 

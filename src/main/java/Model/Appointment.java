@@ -6,32 +6,32 @@ import java.text.SimpleDateFormat;
 
 public class Appointment {
     //Appointment ID
-    private int AID;
+    private long AID;
     //Doctor ID
-    private int DID;
+    private long DID;
     private String s_DID;
     private boolean emptyDID;
     //Patient ID
-    private int PID;
+    private long PID;
     private String reason;
     private java.sql.Date apptDate;
     private java.sql.Date admission;
     private java.sql.Date expDischarge;
     private java.sql.Date actDischarge;
-    private int room;
+    private long room;
     private String s_room;
     private boolean emptyRoom;
     private String treatment;
 
-    public int getAID() {
+    public long getAID() {
         return AID;
     }
 
-    public void setAID(int AID) {
+    public void setAID(long AID) {
         this.AID = AID;
     }
 
-    public int getDID() {
+    public long getDID() {
         return DID;
     }
 
@@ -41,18 +41,18 @@ public class Appointment {
             this.emptyDID = true;
         }
         else{
-            this.DID = Integer.parseInt(s_DID);
+            this.DID = Long.parseLong(s_DID);
         }
     }
-    public void setDID(int DID) {
+    public void setDID(long DID) {
         this.DID = DID;
     }
 
-    public int getPID() {
+    public long getPID() {
         return PID;
     }
 
-    public void setPID(int PID) {
+    public void setPID(long PID) {
         this.PID = PID;
     }
 
@@ -68,9 +68,24 @@ public class Appointment {
         return apptDate;
     }
 
-    public void setApptDate(Date apptDate) {
-        this.apptDate = apptDate;
+
+    /*
+            Date comes in as yyyy-MM-dd
+         */
+    public void setApptDate(String apptDate) {
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = null;
+            try {
+                date = sdf1.parse(apptDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                System.err.println("Error in date format.");
+            }
+            this.apptDate = new java.sql.Date(date.getTime());
+
     }
+
 
     public Date getAdmission() {
         return this.admission;
@@ -80,7 +95,10 @@ public class Appointment {
             Date comes in as yyyy-MM-dd
          */
     public void setAdmission(String admission) {
-
+        if(admission.equals("")){
+            this.admission = null;
+            return;
+        }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = null;
         try {
@@ -104,6 +122,7 @@ public class Appointment {
     public void setExpDischarge(String expDischarge) {
         if(expDischarge.equals("")){
             System.err.println("Rejected an empty date for expected discharge");
+            this.expDischarge = null;
             return;
         }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -128,6 +147,7 @@ public class Appointment {
     public void setActDischarge(String actDischarge) {
         if(actDischarge.equals("")){
             System.err.println("Rejected an empty date for actual discharge");
+            this.actDischarge = null;
             return;
         }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -142,11 +162,11 @@ public class Appointment {
 
     }
 
-    public int getRoom() {
+    public long getRoom() {
         return room;
     }
 
-    public void setRoom(int room) {
+    public void setRoom(long room) {
         this.room = room;
     }
 
@@ -156,7 +176,7 @@ public class Appointment {
             this.emptyRoom = true;
         }
         else{
-            this.room = Integer.parseInt(s_room);
+            this.room = Long.parseLong(s_room);
         }
     }
 

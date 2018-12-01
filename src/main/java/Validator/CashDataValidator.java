@@ -1,51 +1,40 @@
 package Validator;
 
-import Model.Doctor;
+import Model.CashData;
 
-public class DoctorValidator {
+public class CashDataValidator {
 
-    private Doctor doctor;
+    private CashData cashData;
     private String updateMessage;
     private String insertMessage;
     private boolean validUpdate;
     private boolean validInsert;
-    public DoctorValidator(Doctor doctor){
-        this.doctor = doctor;
+
+    public CashDataValidator(CashData cashData){
+        this.cashData = cashData;
         this.validInsert = true;
         this.updateMessage = createUpdateMessage();
     }
-
+    //TODO: We need to validate the admission dates...
     /*
     Status, dept_ID, office
      */
     public String createInsertMessage(){
         //TODO: Do we want to do this?
         this.validInsert = true;
-        String insertMessage = "INSERT INTO aswindle.doctor VALUES(";
-        insertMessage = insertMessage.concat(doctor.getID()+",");
-        insertMessage = insertMessage.concat("'" + doctor.getlName()+ "',");
-        insertMessage = insertMessage.concat("'" + doctor.getfName()+ "',");
-        insertMessage = insertMessage.concat(doctor.getDOB().getTime()+",");
-        if(doctor.getStatus().equals("")){
-            insertMessage = insertMessage.concat("NULL,");
+        String insertMessage = "INSERT INTO aswindle.cash_Data VALUES(";
+        insertMessage = insertMessage.concat(cashData.getXactID()+",");
+        insertMessage = insertMessage.concat(cashData.getEID()+",");
+        insertMessage = insertMessage.concat(cashData.getPID()+",");
+        insertMessage = insertMessage.concat(cashData.getAmount() +",");
+        insertMessage = insertMessage.concat(cashData.getDueDate().getTime() +",");
+        insertMessage = insertMessage.concat("'" + cashData.getStatus() +"',");
+
+        if(cashData.getPaidDate() != null){
+            insertMessage = insertMessage.concat(cashData.getPaidDate().getTime() + "");
         }
         else{
-            insertMessage = insertMessage.concat("'" + doctor.getStatus()+"',");
-
-        }
-        if(doctor.isEmptyDeptID()){
-            insertMessage = insertMessage.concat("NULL,");
-        }
-        else{
-            insertMessage = insertMessage.concat(doctor.getDeptID()+",");
-
-        }
-        if(doctor.isEmptyOffice()){
             insertMessage = insertMessage.concat("NULL");
-        }
-        else{
-            insertMessage = insertMessage.concat(""+doctor.getOffice());
-
         }
         insertMessage = insertMessage.concat(")");
 
@@ -53,56 +42,55 @@ public class DoctorValidator {
     }
 
     public String createUpdateMessage(){
-        String updateMessage = "UPDATE aswindle.Doctor \nSET ";
+        String updateMessage = "UPDATE aswindle.Cash_Data \nSET ";
 
-        if(!doctor.getlName().equals("")){
-            validUpdate = true;
-            updateMessage = updateMessage.concat("L_Name = '" + doctor.getlName()+"'");
-            updateMessage = updateMessage.concat("\n");
-        }
-        if(!doctor.getfName().equals("")){
-            if(validUpdate){
-                updateMessage = updateMessage.concat(",");
-            }
-            updateMessage =  updateMessage.concat("F_Name = '" + doctor.getfName()+"'");
-            updateMessage =  updateMessage.concat("\n");
-            validUpdate  = true;
-        }
 
-        if(!doctor.getStatus().equals("")){
-            if(validUpdate){
-                updateMessage = updateMessage.concat(",");
-            }
-            updateMessage = updateMessage.concat("Status = '" + doctor.getStatus() + "'");
+        if(!cashData.isEmptyEID()){
+            updateMessage = updateMessage.concat("EID = " + cashData.getEID());
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
 
-        if(!doctor.isEmptyDeptID()){
+        if(!cashData.isEmptyAmount()){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
-            updateMessage = updateMessage.concat("Dept_ID = " + doctor.getDeptID());
+            updateMessage = updateMessage.concat("Amount = " + cashData.getAmount());
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
 
-        if(!doctor.isEmptyOffice()){
+        if(cashData.getDueDate() != null){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
-            updateMessage = updateMessage.concat("Office = " + doctor.getOffice());
+            updateMessage = updateMessage.concat("Due = " + cashData.getDueDate().getTime());
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
 
-        updateMessage = updateMessage.concat(" WHERE DID = " + doctor.getID() + "\n");
+        if(!cashData.getStatus().equals("")){
+            if(validUpdate){
+                updateMessage = updateMessage.concat(",");
+            }
+            updateMessage = updateMessage.concat("Status = '" + cashData.getStatus() + "'");
+            updateMessage = updateMessage.concat("\n");
+            validUpdate = true;
+        }
+
+        if(cashData.getPaidDate() != null){
+            if(validUpdate){
+                updateMessage = updateMessage.concat(",");
+            }
+            updateMessage = updateMessage.concat("Paid = " + cashData.getPaidDate().getTime());
+            updateMessage = updateMessage.concat("\n");
+            validUpdate = true;
+        }
+
+        updateMessage = updateMessage.concat(" WHERE Xact_ID = " + cashData.getXactID() + "\n");
         return updateMessage;
     }
 
-    private void validUpdateate(){
-
-    }
 
     public void setUpdateMessage(String updateMessage) {
         this.updateMessage = updateMessage;
