@@ -10,11 +10,11 @@ public class Nurse {
     private String lName;
     private java.sql.Date DOB;
 
-    private int room;
+    private long room;
     private String s_room;
     private boolean emptyRoom;
 
-    private int deptID;
+    private long deptID;
     private String s_deptID;
     private boolean emptyDeptID;
 
@@ -63,7 +63,7 @@ public class Nurse {
 
     }
 
-    public int getRoom() {
+    public long getRoom() {
         return room;
     }
     public void setS_room(String s_room){
@@ -72,14 +72,14 @@ public class Nurse {
             this.emptyRoom = true;
         }
         else{
-            this.room = Integer.parseInt(s_room);
+            this.room = Long.parseLong(s_room);
         }
     }
     public void setRoom(int room) {
         this.room = room;
     }
 
-    public int getDeptID() {
+    public long getDeptID() {
         return deptID;
     }
 
@@ -89,7 +89,7 @@ public class Nurse {
             this.emptyDeptID = true;
         }
         else{
-            this.deptID = Integer.parseInt(s_deptID);
+            this.deptID = Long.parseLong(s_deptID);
         }
     }
 
