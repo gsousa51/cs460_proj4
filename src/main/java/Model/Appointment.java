@@ -41,7 +41,7 @@ public class Appointment {
             this.emptyDID = true;
         }
         else{
-            this.DID = Integer.parseInt(s_DID);
+            this.DID = Long.parseLong(s_DID);
         }
     }
     public void setDID(int DID) {
