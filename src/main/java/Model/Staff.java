@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Staff {
-    private int ID;
+    private long ID;
     private String fName;
     private String lName;
     private java.sql.Date DOB;
@@ -24,7 +24,7 @@ public class Staff {
 
     private String title;
 
-    public int getID() {
+    public long getID() {
         return ID;
     }
 

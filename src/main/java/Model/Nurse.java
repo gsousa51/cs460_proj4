@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Nurse {
-    private int ID;
+    private long ID;
     private String fName;
     private String lName;
     private java.sql.Date DOB;
@@ -18,7 +18,7 @@ public class Nurse {
     private String s_deptID;
     private boolean emptyDeptID;
 
-    public int getID() {
+    public long getID() {
         return ID;
     }
 

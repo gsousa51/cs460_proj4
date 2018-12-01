@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Patient {
-    private int ID;
+    private long ID;
     private String fName;
     private String lName;
     private String gender;
@@ -17,7 +17,7 @@ public class Patient {
     private String s_phone;
     private boolean emptyPhone;
 
-    public int getID() {
+    public long getID() {
         return ID;
     }
 

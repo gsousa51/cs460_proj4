@@ -5,14 +5,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class CashData {
-    private int xactID;
-    private int EID;
+    private long xactID;
+    private long EID;
     private String s_EID;
     private boolean emptyEID;
 
-    private int PID;
+    private long PID;
 
-    private int amount;
+    private long amount;
     private String s_amount;
     private boolean emptyAmount;
 
@@ -20,7 +20,7 @@ public class CashData {
     private String status;
     private java.sql.Date paidDate;
 
-    public int getXactID() {
+    public long getXactID() {
         return xactID;
     }
 
@@ -38,11 +38,11 @@ public class CashData {
             this.emptyEID = true;
         }
         else{
-            this.EID = Integer.parseInt(s_EID);
+            this.EID = Long.parseLong(s_EID);
         }
     }
 
-    public int getEID() {
+    public long getEID() {
         return EID;
     }
 
@@ -54,7 +54,7 @@ public class CashData {
         this.EID = EID;
     }
 
-    public int getPID() {
+    public long getPID() {
         return PID;
     }
 
@@ -72,11 +72,11 @@ public class CashData {
             this.emptyAmount = true;
         }
         else{
-            this.amount = Integer.parseInt(s_amount);
+            this.amount = Long.parseLong(s_amount);
         }
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 

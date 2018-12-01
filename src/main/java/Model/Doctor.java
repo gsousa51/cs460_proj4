@@ -5,26 +5,26 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class Doctor {
-    private int ID;
+    private long ID;
     private String fName;
     private String lName;
     private String status;
     private java.sql.Date DOB;
     private String address;
 
-    private int phone;
+    private long phone;
     private String s_phone;
     private boolean emptyPhone;
 
-    private int deptID;
+    private long deptID;
     private String s_deptID;
     private boolean emptyDeptID;
 
-    private int office;
+    private long office;
     private String s_office;
     private boolean emptyOffice;
 
-    public int getID() {
+    public long getID() {
         return ID;
     }
 
@@ -85,7 +85,7 @@ public class Doctor {
         this.address = address;
     }
 
-    public int getPhone() {
+    public long getPhone() {
         return phone;
     }
 
@@ -99,11 +99,11 @@ public class Doctor {
             this.emptyPhone = true;
         }
         else{
-            this.phone = Integer.parseInt(s_phone);
+            this.phone = Long.parseLong(s_phone);
         }
     }
 
-    public int getDeptID() {
+    public long getDeptID() {
         return deptID;
     }
 
@@ -117,11 +117,11 @@ public class Doctor {
             this.emptyDeptID = true;
         }
         else{
-            this.deptID = Integer.parseInt(s_deptID);
+            this.deptID = Long.parseLong(s_deptID);
         }
     }
 
-    public int getOffice() {
+    public long getOffice() {
         return office;
     }
 
@@ -135,7 +135,7 @@ public class Doctor {
             this.emptyOffice = true;
         }
         else{
-            this.office = Integer.parseInt(s_office);
+            this.office = Long.parseLong(s_office);
         }
     }
 

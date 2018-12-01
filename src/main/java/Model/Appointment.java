@@ -6,24 +6,24 @@ import java.text.SimpleDateFormat;
 
 public class Appointment {
     //Appointment ID
-    private int AID;
+    private long AID;
     //Doctor ID
-    private int DID;
+    private long DID;
     private String s_DID;
     private boolean emptyDID;
     //Patient ID
-    private int PID;
+    private long PID;
     private String reason;
     private java.sql.Date apptDate;
     private java.sql.Date admission;
     private java.sql.Date expDischarge;
     private java.sql.Date actDischarge;
-    private int room;
+    private long room;
     private String s_room;
     private boolean emptyRoom;
     private String treatment;
 
-    public int getAID() {
+    public long getAID() {
         return AID;
     }
 
@@ -31,7 +31,7 @@ public class Appointment {
         this.AID = AID;
     }
 
-    public int getDID() {
+    public long getDID() {
         return DID;
     }
 
@@ -48,7 +48,7 @@ public class Appointment {
         this.DID = DID;
     }
 
-    public int getPID() {
+    public long getPID() {
         return PID;
     }
 
@@ -162,7 +162,7 @@ public class Appointment {
 
     }
 
-    public int getRoom() {
+    public long getRoom() {
         return room;
     }
 
@@ -176,7 +176,7 @@ public class Appointment {
             this.emptyRoom = true;
         }
         else{
-            this.room = Integer.parseInt(s_room);
+            this.room = Long.parseLong(s_room);
         }
     }
 
