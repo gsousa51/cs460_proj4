@@ -27,7 +27,7 @@ public class Appointment {
         return AID;
     }
 
-    public void setAID(int AID) {
+    public void setAID(long AID) {
         this.AID = AID;
     }
 
@@ -44,7 +44,7 @@ public class Appointment {
             this.DID = Long.parseLong(s_DID);
         }
     }
-    public void setDID(int DID) {
+    public void setDID(long DID) {
         this.DID = DID;
     }
 
@@ -52,7 +52,7 @@ public class Appointment {
         return PID;
     }
 
-    public void setPID(int PID) {
+    public void setPID(long PID) {
         this.PID = PID;
     }
 
@@ -166,7 +166,7 @@ public class Appointment {
         return room;
     }
 
-    public void setRoom(int room) {
+    public void setRoom(long room) {
         this.room = room;
     }
 
