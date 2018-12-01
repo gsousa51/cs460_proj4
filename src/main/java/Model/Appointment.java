@@ -14,6 +14,7 @@ public class Appointment {
     //Patient ID
     private int PID;
     private String reason;
+    private java.sql.Date apptDate;
     private java.sql.Date admission;
     private java.sql.Date expDischarge;
     private java.sql.Date actDischarge;
@@ -63,7 +64,13 @@ public class Appointment {
         this.reason = reason;
     }
 
+    public Date getApptDate() {
+        return apptDate;
+    }
 
+    public void setApptDate(Date apptDate) {
+        this.apptDate = apptDate;
+    }
 
     public Date getAdmission() {
         return this.admission;
