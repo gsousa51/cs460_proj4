@@ -60,7 +60,7 @@ public class StaffValidator {
 
         }
         if(!staff.getTitle().equals("")){
-            insertMessage = insertMessage.concat(staff.getTitle());
+            insertMessage = insertMessage.concat("'" + staff.getTitle() + "'");
         }
         else{
             insertMessage = insertMessage.concat("NULL");
