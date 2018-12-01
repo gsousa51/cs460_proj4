@@ -114,7 +114,7 @@ public class StaffValidator {
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
-        updateMessage = updateMessage.concat(" WHERE NID = " + staff.getID() + "\n");
+        updateMessage = updateMessage.concat(" WHERE EID = " + staff.getID() + "\n");
         return updateMessage;
     }
 
