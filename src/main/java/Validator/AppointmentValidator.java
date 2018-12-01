@@ -92,7 +92,7 @@ public class AppointmentValidator {
             validUpdate = true;
         }
 
-        if(!(appointment.getAdmission() != null)){
+        if(appointment.getAdmission() != null){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
@@ -101,7 +101,7 @@ public class AppointmentValidator {
             validUpdate = true;
         }
 
-        if(!(appointment.getActDischarge() != null)){
+        if(appointment.getActDischarge() != null){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
@@ -110,7 +110,7 @@ public class AppointmentValidator {
             validUpdate = true;
         }
 
-        if(!(appointment.getExpDischarge() != null)){
+        if(appointment.getExpDischarge() != null){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
