@@ -11,10 +11,10 @@
 <form action="#" th:action="@{/addAppointment}" th:object="${appointment}" method="post">
     <p>Appointment ID: <input type="number" required th:field="*{AID}" /></p>
     <p>Patient ID: <input type="number" required th:field="*{PID}" /></p>
-    <p>Doctor ID: <input type="number"  th:field="*{s_DID}" /></p>
+    <p>Doctor ID: <input type="number"   th:field="*{s_DID}" /></p>
     <p>Reason for Visit: <input type="text" required th:field="*{reason}" /></p>
     <p>Appointment Date: <input type="date" required th:field="*{apptDate}" /></p>
-    <p>Admission Date: <input type="date" required th:field="*{admission}" /></p>
+    <p>Admission Date: <input type="date"  th:field="*{admission}" /></p>
     <p>Expected Discharge: <input type="date"  th:field="*{expDischarge}" /></p>
     <p>Actual Discharge: <input type="date"  th:field="*{actDischarge}" /></p>
     <p>Room Number: <input type="number" min="1" max="300" th:field="*{s_room}" /></p>

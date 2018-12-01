@@ -68,9 +68,24 @@ public class Appointment {
         return apptDate;
     }
 
-    public void setApptDate(Date apptDate) {
-        this.apptDate = apptDate;
+
+    /*
+            Date comes in as yyyy-MM-dd
+         */
+    public void setApptDate(String apptDate) {
+
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = null;
+            try {
+                date = sdf1.parse(apptDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                System.err.println("Error in date format.");
+            }
+            this.apptDate = new java.sql.Date(date.getTime());
+
     }
+
 
     public Date getAdmission() {
         return this.admission;
