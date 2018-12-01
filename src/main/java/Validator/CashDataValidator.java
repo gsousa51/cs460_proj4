@@ -88,11 +88,12 @@ public class CashDataValidator {
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
+
         if(cashData.getPaidDate() != null){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
-            updateMessage = updateMessage.concat("Paid = " + cashData.getDueDate().getTime());
+            updateMessage = updateMessage.concat("Paid = " + cashData.getPaidDate().getTime());
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
