@@ -1,5 +1,7 @@
 package Controller;
 
+import Validator.PatientValidator;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -40,24 +42,59 @@ public class PatientController {
     public String updatePatientForm(Model model) {
         model.addAttribute("patient", new Patient());
         return "updatePatient";
+
     }
     @PostMapping("/addPatient")
-    public String patientAdd(@ModelAttribute Patient patient) {
-        //TODO: Add business logic here
+    public String patientAdd(Model model, @ModelAttribute Patient patient) {
+        PatientValidator patientValidator = new PatientValidator(patient);
+        model.addAttribute(patientValidator);
+        if(patientValidator.isValidInsert()) {
+            try {
+                this.jdbcTemplate.update(patientValidator.getInsertMessage());
+            }catch(DataAccessException d){
+                System.err.println("*****CAUGHT ERROR*****");
+                d.printStackTrace();
+                return "resultError";
+            }
+        }
+        else{
+            System.err.println("Invalid query");
+            return "resultError";
+        }
         return "resultPatient";
     }
 
     @PostMapping("/deletePatient")
     public String patientDelete(@ModelAttribute Patient patient){
-        //TODO: Add business logic here
-        System.out.println("Hit the delete endpoint");
+        Object[] ID = {patient.getID()};
+        try {
+            this.jdbcTemplate.update("DELETE from aswindle.Patient WHERE PID = ?", ID);
+        }
+        catch(DataAccessException d){
+            d.printStackTrace();
+            return "resultError";
+        }
         return "resultPatient";
     }
 
     @PostMapping("/updatePatient")
-    public String patientUpdate(@ModelAttribute Patient patient){
-        //TODO: We need to figure out how to handle the fields were left empty
-        //Most likely answer is
+    public String patientUpdate(Model model, @ModelAttribute Patient patient){
+        PatientValidator patientValidator = new PatientValidator(patient);
+        model.addAttribute("validation", patientValidator);
+
+        if(patientValidator.isValidUpdate()){
+            try {
+                this.jdbcTemplate.update(patientValidator.getUpdateMessage());
+            }catch(DataAccessException d){
+                //TODO: Send user to an error page.
+                System.err.println("****CAUGHT ERROR****");
+                d.printStackTrace();
+            }
+            System.err.println("executed update query");
+        }
+        else{
+            System.err.println("Invalid update message");
+        }
         return "resultPatient";
     }
 }

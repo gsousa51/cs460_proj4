@@ -1,5 +1,6 @@
 package Controller;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import Model.Doctor;
-
+import Validator.DoctorValidator;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,9 +31,11 @@ public class DoctorController {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+
     @GetMapping("/addDoctor")
     public String addDoctorForm(Model model) {
         model.addAttribute("doctor", new Doctor());
+
         return "addDoctor";
     }
 
@@ -47,9 +50,61 @@ public class DoctorController {
         return "updateDoctor";
     }
     @PostMapping("/addDoctor")
-    public String doctorAdd(@ModelAttribute Doctor doctor) {
-        //TODO: Add business logic here
-        List<String> allNames = this.jdbcTemplate.query(
+    public String doctorAdd(Model model, @ModelAttribute Doctor doctor) {
+        DoctorValidator doctorValidator = new DoctorValidator(doctor);
+        model.addAttribute(doctorValidator);
+        if(doctorValidator.isValidInsert()) {
+            try {
+
+                this.jdbcTemplate.update(doctorValidator.getInsertMessage());
+
+            }catch(DataAccessException d){
+                System.err.println("*****CAUGHT ERROR*****");
+                return "resultError";
+            }
+        }
+        else{
+            System.err.println("Invalid query");
+            return "resultError";
+        }
+        return "resultDoctor";
+    }
+
+    @PostMapping("/deleteDoctor")
+    public String doctorDelete(@ModelAttribute Doctor doctor){
+        Object[] ID = {doctor.getID()};
+        try {
+            this.jdbcTemplate.update("DELETE from aswindle.Doctor WHERE DID = ?", ID);
+        }
+        catch(DataAccessException d){
+            d.printStackTrace();
+            return "resultError";
+        }
+        return "resultDoctor";
+    }
+
+    @PostMapping("/updateDoctor")
+    public String doctorUpdate(Model model, @ModelAttribute Doctor doctor){
+        DoctorValidator doctorValidator = new DoctorValidator(doctor);
+        model.addAttribute("validation", doctorValidator);
+
+        if(doctorValidator.isValidUpdate()){
+            try {
+                this.jdbcTemplate.update(doctorValidator.getUpdateMessage());
+            }catch(DataAccessException d){
+                //TODO: Send user to an error page.
+                System.err.println("****CAUGHT ERROR****");
+            }
+            System.err.println("executed update query");
+        }
+        else{
+            System.err.println("Invalid update message");
+        }
+        return "resultDoctor";
+    }
+}
+    /*
+            List<String> allNames = this.jdbcTemplate.query(
                 "select * from aswindle.doctor",
                 new RowMapper<String>() {
                     public String mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -60,20 +115,4 @@ public class DoctorController {
                     }
                 });
         System.out.println(allNames.toString());
-        return "resultDoctor";
-    }
-
-    @PostMapping("/deleteDoctor")
-    public String doctorDelete(@ModelAttribute Doctor doctor){
-        //TODO: Add business logic here
-        System.out.println("Hit the delete endpoint");
-        return "resultDoctor";
-    }
-
-    @PostMapping("/updateDoctor")
-    public String doctorUpdate(@ModelAttribute Doctor doctor){
-        //TODO: We need to figure out how to handle the fields were left empty
-        //Most likely answer is
-        return "resultDoctor";
-    }
-}
+     */
