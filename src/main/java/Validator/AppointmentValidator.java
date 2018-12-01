@@ -26,7 +26,7 @@ public class AppointmentValidator {
         this.validInsert = true;
         this.updateMessage = createUpdateMessage();
     }
-
+//TODO: We need to validate the admission dates...
     /*
     Status, dept_ID, office
      */
