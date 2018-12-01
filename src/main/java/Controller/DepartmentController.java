@@ -42,13 +42,14 @@ public class DepartmentController {
             try {
                 this.jdbcTemplate.update(departmentValidator.getUpdateMessage());
             }catch(DataAccessException d){
-                //TODO: Send user to an error page.
+                d.printStackTrace();
                 System.err.println("****CAUGHT ERROR****");
+                return "resultError";
             }
             System.err.println("executed update query");
         }
         else{
-            System.err.println("Invalid update message");
+            return "resultError";
         }
         return "resultDepartment";
     }
