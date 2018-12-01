@@ -49,7 +49,7 @@ public class StaffValidator {
             insertMessage = insertMessage.concat("NULL,");
         }
         else{
-            insertMessage = insertMessage.concat(staff.getDeptID()+"");
+            insertMessage = insertMessage.concat(staff.getDeptID()+",");
 
         }
         if(staff.isEmptyOffice()){
