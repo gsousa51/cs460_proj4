@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Query 4 Input</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Medicines for Patients By Receptionist</h1>
+<form action="#" th:action="@{/query4}" th:object="${query4}" method="post">
+    <p>Employee ID: <input type="text" required th:field="*{EID}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
+</body>
+</html>

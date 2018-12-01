@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Query 2 Results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h3> Doctors in Specified Department</h3>
+<table>
+    <tr th:each="name : ${names}">
+        <td th:utext="${name}"></td>
+    </tr>
+</table>
+</body>
+</html>
