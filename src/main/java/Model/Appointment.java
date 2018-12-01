@@ -95,7 +95,10 @@ public class Appointment {
             Date comes in as yyyy-MM-dd
          */
     public void setAdmission(String admission) {
-
+        if(admission.equals("")){
+            this.admission = null;
+            return;
+        }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
         java.util.Date date = null;
         try {
@@ -119,6 +122,7 @@ public class Appointment {
     public void setExpDischarge(String expDischarge) {
         if(expDischarge.equals("")){
             System.err.println("Rejected an empty date for expected discharge");
+            this.expDischarge = null;
             return;
         }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -143,6 +147,7 @@ public class Appointment {
     public void setActDischarge(String actDischarge) {
         if(actDischarge.equals("")){
             System.err.println("Rejected an empty date for actual discharge");
+            this.actDischarge = null;
             return;
         }
         SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
