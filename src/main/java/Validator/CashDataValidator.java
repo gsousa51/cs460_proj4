@@ -33,7 +33,7 @@ public class CashDataValidator {
     public String createInsertMessage(){
         //TODO: Do we want to do this?
         this.validInsert = true;
-        String insertMessage = "INSERT INTO aswindle.cashData VALUES(";
+        String insertMessage = "INSERT INTO aswindle.cash_Data VALUES(";
         insertMessage = insertMessage.concat(cashData.getXactID()+",");
         insertMessage = insertMessage.concat(cashData.getEID()+",");
         insertMessage = insertMessage.concat(cashData.getPID()+",");
@@ -84,7 +84,7 @@ public class CashDataValidator {
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
-            updateMessage = updateMessage.concat("Status = " + cashData.getStatus());
+            updateMessage = updateMessage.concat("Status = '" + cashData.getStatus() + "'");
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
