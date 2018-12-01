@@ -22,7 +22,7 @@ public class Pharmacist {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.ID = ID;
     }
 
@@ -68,7 +68,7 @@ public class Pharmacist {
         return office;
     }
 
-    public void setOffice(int office) {
+    public void setOffice(long office) {
         this.office = office;
     }
 
@@ -86,7 +86,7 @@ public class Pharmacist {
         return deptID;
     }
 
-    public void setDeptID(int deptID) {
+    public void setDeptID(long deptID) {
         this.deptID = deptID;
     }
 

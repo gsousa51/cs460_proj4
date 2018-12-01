@@ -28,7 +28,7 @@ public class Doctor {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.ID = ID;
     }
 
@@ -89,7 +89,7 @@ public class Doctor {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 
@@ -107,7 +107,7 @@ public class Doctor {
         return deptID;
     }
 
-    public void setDeptID(int deptID) {
+    public void setDeptID(long deptID) {
         this.deptID = deptID;
     }
 
@@ -125,7 +125,7 @@ public class Doctor {
         return office;
     }
 
-    public void setOffice(int office) {
+    public void setOffice(long office) {
         this.office = office;
     }
 

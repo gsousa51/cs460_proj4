@@ -28,7 +28,7 @@ public class Staff {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.ID = ID;
     }
 
@@ -83,7 +83,7 @@ public class Staff {
         }
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(long salary) {
         this.salary = salary;
     }
 
@@ -101,7 +101,7 @@ public class Staff {
         }
     }
 
-    public void setDeptID(int deptID) {
+    public void setDeptID(long deptID) {
         this.deptID = deptID;
     }
 
@@ -109,7 +109,7 @@ public class Staff {
         return office;
     }
 
-    public void setOffice(int office) {
+    public void setOffice(long office) {
         this.office = office;
     }
 

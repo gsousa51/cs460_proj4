@@ -22,7 +22,7 @@ public class Nurse {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.ID = ID;
     }
 
@@ -75,7 +75,7 @@ public class Nurse {
             this.room = Long.parseLong(s_room);
         }
     }
-    public void setRoom(int room) {
+    public void setRoom(long room) {
         this.room = room;
     }
 
@@ -93,7 +93,7 @@ public class Nurse {
         }
     }
 
-    public void setDeptID(int deptID) {
+    public void setDeptID(long deptID) {
         this.deptID = deptID;
     }
 

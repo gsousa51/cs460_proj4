@@ -14,7 +14,7 @@ public class Department {
         return ID;
     }
 
-    public void setID(int ID) {
+    public void setID(long ID) {
         this.ID = ID;
     }
 
@@ -30,7 +30,7 @@ public class Department {
         return office;
     }
 
-    public void setOffice(int office) {
+    public void setOffice(long office) {
         this.office = office;
     }
 

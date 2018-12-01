@@ -24,7 +24,7 @@ public class CashData {
         return xactID;
     }
 
-    public void setXactID(int xactID) {
+    public void setXactID(long xactID) {
         this.xactID = xactID;
     }
 
@@ -50,7 +50,7 @@ public class CashData {
         System.err.println("Set EID to be empty");
         this.emptyEID = true;
     }
-    public void setEID(int EID) {
+    public void setEID(long EID) {
         this.EID = EID;
     }
 
@@ -58,7 +58,7 @@ public class CashData {
         return PID;
     }
 
-    public void setPID(int PID) {
+    public void setPID(long PID) {
         this.PID = PID;
     }
 
@@ -84,7 +84,7 @@ public class CashData {
         System.err.println("Set amount to be empty");
         this.emptyAmount = true;
     }
-    public void setAmount(int amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 
