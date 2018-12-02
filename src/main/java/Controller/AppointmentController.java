@@ -65,10 +65,10 @@ public class AppointmentController {
         model.addAttribute("validation", appointmentValidator);
 
         if(appointmentValidator.isValidUpdate()){
-            this.getDate("Appt_Date" , appointment.getAID());
-            this.getDate("Admission" , appointment.getAID());
-            this.getDate("Exp_Discharge" , appointment.getAID());
-            this.getDate("Act_Discharge" , appointment.getAID());
+            long apptDate = this.getDate("Appt_Date" , appointment.getAID());
+            long admission = this.getDate("Admission" , appointment.getAID());
+            long expDischarge = this.getDate("Exp_Discharge" , appointment.getAID());
+            long actDischarge = this.getDate("Act_Discharge" , appointment.getAID());
 
             try {
                 this.jdbcTemplate.update(appointmentValidator.getUpdateMessage());
