@@ -57,7 +57,7 @@ public class AppointmentValidator {
             insertMessage = insertMessage.concat("NULL,");
         }
 
-        if(!appointment.getTreatment().equals("")){
+        if(!appointment.getTreatment().equals("empty")){
             insertMessage = insertMessage.concat("'" + appointment.getTreatment()+ "'");
         }
         else{
@@ -116,7 +116,7 @@ public class AppointmentValidator {
             validUpdate = true;
         }
 
-        if(!appointment.getTreatment().equals("")){
+        if(!appointment.getTreatment().equals("empty")){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
