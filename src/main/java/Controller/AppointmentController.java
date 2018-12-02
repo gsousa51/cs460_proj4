@@ -43,7 +43,7 @@ public class AppointmentController {
         AppointmentValidator validator = new AppointmentValidator(appointment);
         AppointmentValidator appointmentValidator = new AppointmentValidator(appointment);
         model.addAttribute(appointmentValidator);
-        if(appointmentValidator.isValidInsert()) {
+        if(appointmentValidator.validateInsertDates()) {
             try {
                 this.jdbcTemplate.update(appointmentValidator.getInsertMessage());
             }catch(DataAccessException d){

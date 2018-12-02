@@ -13,7 +13,6 @@ public class AppointmentValidator {
     public AppointmentValidator(Appointment appointment){
         this.appointment = appointment;
         //Need to make sure the dates are valid for an insertion statement.
-        this.validInsert = validateInsertDates();
         this.updateMessage = createUpdateMessage();
     }
 //TODO: We need to validate the admission dates...
@@ -128,7 +127,7 @@ public class AppointmentValidator {
         return updateMessage;
     }
 
-    private boolean validateInsertDates(){
+    public boolean validateInsertDates(){
         //Check if we admitted the patient. If so, this can't be before the appointment date
         //Or after the expected/actual discharges.
         if(appointment.getAdmission() != null){
