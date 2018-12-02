@@ -97,7 +97,11 @@ public class AppointmentController {
         String query = "SELECT admission FROM aswindle.appointment WHERE AID = ?";
         String admission = this.jdbcTemplate.queryForObject(
                 query, new Object[] {AID}, String.class);
-        System.out.println(admission);
+        System.out.println("ADMISSION: " + admission);
+        if(admission.equals("null")){
+            System.out.println("VALUE WAS NULL");
+        }
+
 
     }
 }
