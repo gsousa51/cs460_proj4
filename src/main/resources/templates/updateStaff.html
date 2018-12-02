@@ -15,7 +15,11 @@
     <p>Salary: <input type="number" th:field="*{s_salary}" /></p>
     <p>Department ID: <input type="number" th:field="*{s_deptID}" /></p>
     <p>Office: <input type="number" min="1" max="300" th:field="*{s_office}" /></p>
-    <p>Title: <input type="text"  th:field="*{title}" /></p>
+    Title: <select th:field="*{title}">
+        <option th:value="" th:text=""></option>
+        <option th:value="receptionist" th:text="Receptionist"></option>
+        <option th:value="cashier" th:text="Cashier"></option>
+        </select>
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 
