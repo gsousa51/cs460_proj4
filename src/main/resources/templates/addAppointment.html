@@ -18,7 +18,13 @@
     <p>Expected Discharge: <input type="date"  th:field="*{expDischarge}" /></p>
     <p>Actual Discharge: <input type="date"  th:field="*{actDischarge}" /></p>
     <p>Room Number: <input type="number" min="1" max="300" th:field="*{s_room}" /></p>
-    <p>Treatment Type: <input type="text" th:field="*{treatment}" /></p>
+    <select th:field="*{treatment}">
+        <option th:value="empty" th:text="---Treatment---"></option>
+        <option th:value="physical therapy" th:text="Physical Therapy"></option>
+        <option th:value="surgical" th:text="Surgical"></option>
+        <option th:value="medical" th:text="medical"></option>
+    </select>
+
     <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
 </form>
 

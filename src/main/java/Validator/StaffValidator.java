@@ -48,7 +48,7 @@ public class StaffValidator {
             insertMessage = insertMessage.concat(staff.getOffice()+",");
 
         }
-        if(!staff.getTitle().equals("")){
+        if(!staff.getTitle().equals("empty")){
             insertMessage = insertMessage.concat("'" + staff.getTitle() + "'");
         }
         else{
@@ -95,7 +95,7 @@ public class StaffValidator {
             updateMessage = updateMessage.concat("\n");
             validUpdate = true;
         }
-        if(!staff.getTitle().equals("")){
+        if(!staff.getTitle().equals("empty")){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }

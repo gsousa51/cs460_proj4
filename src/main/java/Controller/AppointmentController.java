@@ -43,7 +43,7 @@ public class AppointmentController {
         AppointmentValidator validator = new AppointmentValidator(appointment);
         AppointmentValidator appointmentValidator = new AppointmentValidator(appointment);
         model.addAttribute(appointmentValidator);
-        if(appointmentValidator.isValidInsert()) {
+        if(appointmentValidator.validateInsertDates()) {
             try {
                 this.jdbcTemplate.update(appointmentValidator.getInsertMessage());
             }catch(DataAccessException d){
@@ -53,7 +53,7 @@ public class AppointmentController {
             }
         }
         else{
-            System.err.println("Invalid query");
+            System.err.println("Invalid Dates");
             return "resultError";
         }
         return "resultAppointment";
@@ -65,20 +65,43 @@ public class AppointmentController {
         model.addAttribute("validation", appointmentValidator);
 
         if(appointmentValidator.isValidUpdate()){
-            try {
-                this.jdbcTemplate.update(appointmentValidator.getUpdateMessage());
-            }catch(DataAccessException d){
-                //TODO: Send user to an error page.
-                System.err.println("****CAUGHT ERROR****");
-                d.printStackTrace();
+            long apptDate = this.getDate("Appt_Date" , appointment.getAID());
+            long admission = this.getDate("Admission" , appointment.getAID());
+            long expDischarge = this.getDate("Exp_Discharge" , appointment.getAID());
+            long actDischarge = this.getDate("Act_Discharge" , appointment.getAID());
+            if(appointmentValidator.validateUpdate(apptDate, admission, actDischarge, expDischarge)) {
+                try {
+                    this.jdbcTemplate.update(appointmentValidator.getUpdateMessage());
+                } catch (DataAccessException d) {
+                    //TODO: Send user to an error page.
+                    System.err.println("****CAUGHT ERROR****");
+                    d.printStackTrace();
+                    return "resultError";
+                }
+                System.err.println("executed update query");
+            }
+            else{
                 return "resultError";
             }
-            System.err.println("executed update query");
         }
         else{
             System.err.println("Invalid update message");
             return "resultError";
         }
         return "resultAppointment";
+    }
+
+    private long getDate(String colName, long AID){
+        String query = "SELECT " + colName + " FROM aswindle.appointment WHERE AID = ?";
+        String result = this.jdbcTemplate.queryForObject(
+                query, new Object[] {AID}, String.class);
+        System.out.println(colName + ": " + result);
+        if(result == null){
+            System.out.println("VALUE WAS NULL");
+            return -1;
+        }
+        else{
+            return Long.parseLong(result);
+        }
     }
 }

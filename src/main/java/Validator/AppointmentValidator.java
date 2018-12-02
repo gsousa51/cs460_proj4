@@ -12,7 +12,7 @@ public class AppointmentValidator {
 
     public AppointmentValidator(Appointment appointment){
         this.appointment = appointment;
-        this.validInsert = true;
+        //Need to make sure the dates are valid for an insertion statement.
         this.updateMessage = createUpdateMessage();
     }
 //TODO: We need to validate the admission dates...
@@ -20,8 +20,7 @@ public class AppointmentValidator {
     Status, dept_ID, office
      */
     public String createInsertMessage(){
-        //TODO: Do we want to do this?
-        this.validInsert = true;
+
         String insertMessage = "INSERT INTO aswindle.appointment VALUES(";
         insertMessage = insertMessage.concat(appointment.getAID()+",");
         insertMessage = insertMessage.concat(appointment.getPID()+",");
@@ -57,7 +56,7 @@ public class AppointmentValidator {
             insertMessage = insertMessage.concat("NULL,");
         }
 
-        if(!appointment.getTreatment().equals("")){
+        if(!appointment.getTreatment().equals("empty")){
             insertMessage = insertMessage.concat("'" + appointment.getTreatment()+ "'");
         }
         else{
@@ -116,7 +115,7 @@ public class AppointmentValidator {
             validUpdate = true;
         }
 
-        if(!appointment.getTreatment().equals("")){
+        if(!appointment.getTreatment().equals("empty")){
             if(validUpdate){
                 updateMessage = updateMessage.concat(",");
             }
@@ -128,7 +127,105 @@ public class AppointmentValidator {
         return updateMessage;
     }
 
+    public boolean validateInsertDates(){
+        //Check if we admitted the patient. If so, this can't be before the appointment date
+        //Or after the expected/actual discharges.
+        if(appointment.getAdmission() != null){
+            if(appointment.getAdmission().getTime() < appointment.getApptDate().getTime()){
+                return false;
+            }
+            if(appointment.getActDischarge() != null) {
+                if (appointment.getActDischarge().getTime() < appointment.getAdmission().getTime()) {
+                    return false;
+                }
+            }
+            if(appointment.getExpDischarge() != null){
+                if(appointment.getExpDischarge().getTime() < appointment.getAdmission().getTime()) {
+                    return false;
+                }
+            }
+        }
+        else{
+            //Exp discharge can't be before the appointment date
+            if(appointment.getExpDischarge() != null){
+                if(appointment.getExpDischarge().getTime() < appointment.getApptDate().getTime()){
+                    return false;
+                }
+            }
+            //Neither can the actual discharge
+            if(appointment.getActDischarge() != null){
+                if(appointment.getActDischarge().getTime() < appointment.getApptDate().getTime()){
+                    return false;
+                }
+            }
+        }
 
+        //If we got here, this is a valid insertion.
+        return true;
+    }
+
+    /*
+        Parameters given are the values for the doctor in the database.
+     */
+    public boolean validateUpdate(long apptDate, long admission, long actDis, long expDis){
+        if(apptDate == -1){
+            return false;
+        }
+
+        //If we're attempting to update admission
+        if(appointment.getAdmission() != null){
+            //It can't be before the appointment date.
+            if(appointment.getAdmission().getTime() < apptDate){
+                return false;
+            }
+            //If we're also attempting to update the discharge it can't be before the admission date.
+            if(appointment.getExpDischarge() != null){
+                if(appointment.getAdmission().getTime() > appointment.getExpDischarge().getTime()){
+                    return false;
+                }
+            }
+            else if(expDis != -1){
+                if(appointment.getAdmission().getTime() > expDis){
+                    return false;
+                }
+            }
+            if(appointment.getActDischarge() != null){
+                if(appointment.getAdmission().getTime() > appointment.getActDischarge().getTime()){
+                    return false;
+                }
+            }
+            else if(actDis != -1){
+                if(appointment.getAdmission().getTime() > actDis){
+                    return false;
+                }
+            }
+        }
+        else{
+            //Else we're not trying to update admission, so if we're updating the discharges
+            //we need to test their values again the values already in the DB.
+            if(appointment.getExpDischarge() != null){
+                if(admission != -1){
+                    if(appointment.getExpDischarge().getTime() < admission){
+                        return false;
+                    }
+                }
+                else if(appointment.getExpDischarge().getTime() < apptDate){
+                    return false;
+                }
+            }
+            if(appointment.getActDischarge() != null){
+                if(admission != -1){
+                    if(appointment.getActDischarge().getTime() < admission){
+                        return false;
+                    }
+                }
+                else if(appointment.getActDischarge().getTime() < apptDate){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     public void setUpdateMessage(String updateMessage) {
         this.updateMessage = updateMessage;
     }
