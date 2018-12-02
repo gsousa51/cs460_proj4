@@ -12,7 +12,8 @@ public class AppointmentValidator {
 
     public AppointmentValidator(Appointment appointment){
         this.appointment = appointment;
-        this.validInsert = true;
+        //Need to make sure the dates are valid for an insertion statement.
+        this.validInsert = validateInsertDates();
         this.updateMessage = createUpdateMessage();
     }
 //TODO: We need to validate the admission dates...
@@ -20,8 +21,7 @@ public class AppointmentValidator {
     Status, dept_ID, office
      */
     public String createInsertMessage(){
-        //TODO: Do we want to do this?
-        this.validInsert = true;
+
         String insertMessage = "INSERT INTO aswindle.appointment VALUES(";
         insertMessage = insertMessage.concat(appointment.getAID()+",");
         insertMessage = insertMessage.concat(appointment.getPID()+",");
@@ -128,6 +128,42 @@ public class AppointmentValidator {
         return updateMessage;
     }
 
+    private boolean validateInsertDates(){
+        //Check if we admitted the patient. If so, this can't be before the appointment date
+        //Or after the expected/actual discharges.
+        if(appointment.getAdmission() != null){
+            if(appointment.getAdmission().getTime() < appointment.getApptDate().getTime()){
+                return false;
+            }
+            if(appointment.getActDischarge() != null) {
+                if (appointment.getActDischarge().getTime() < appointment.getAdmission().getTime()) {
+                    return false;
+                }
+            }
+            if(appointment.getExpDischarge() != null){
+                if(appointment.getExpDischarge().getTime() < appointment.getAdmission().getTime()) {
+                    return false;
+                }
+            }
+        }
+        else{
+            //Exp discharge can't be before the appointment date
+            if(appointment.getExpDischarge() != null){
+                if(appointment.getExpDischarge().getTime() < appointment.getApptDate().getTime()){
+                    return false;
+                }
+            }
+            //Neither can the actual discharge
+            if(appointment.getActDischarge() != null){
+                if(appointment.getActDischarge().getTime() < appointment.getApptDate().getTime()){
+                    return false;
+                }
+            }
+        }
+
+        //If we got here, this is a valid insertion.
+        return true;
+    }
 
     public void setUpdateMessage(String updateMessage) {
         this.updateMessage = updateMessage;

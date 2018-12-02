@@ -53,7 +53,7 @@ public class AppointmentController {
             }
         }
         else{
-            System.err.println("Invalid query");
+            System.err.println("Invalid Dates");
             return "resultError";
         }
         return "resultAppointment";
@@ -65,6 +65,7 @@ public class AppointmentController {
         model.addAttribute("validation", appointmentValidator);
 
         if(appointmentValidator.isValidUpdate()){
+            this.getApptDate(appointment.getAID());
             try {
                 this.jdbcTemplate.update(appointmentValidator.getUpdateMessage());
             }catch(DataAccessException d){
@@ -80,5 +81,15 @@ public class AppointmentController {
             return "resultError";
         }
         return "resultAppointment";
+    }
+
+    private long getApptDate(long AID){
+        System.out.println("****CALLED GET APPT DATE***");
+        String query = "SELECT appt_date FROM aswindle.appointment WHERE AID = ?";
+        long apptDate = this.jdbcTemplate.queryForObject(
+                query, new Object[] {AID}, Long.class);
+        System.out.println(apptDate);
+
+        return apptDate;
     }
 }
