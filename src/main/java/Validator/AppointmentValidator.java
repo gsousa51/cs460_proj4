@@ -165,6 +165,68 @@ public class AppointmentValidator {
         return true;
     }
 
+    /*
+        Parameters given are the values for the doctor in the database.
+     */
+    public boolean validateUpdate(long apptDate, long admission, long actDis, long expDis){
+        if(apptDate == -1){
+            return false;
+        }
+
+        //If we're attempting to update admission
+        if(appointment.getAdmission() != null){
+            //It can't be before the appointment date.
+            if(appointment.getAdmission().getTime() < apptDate){
+                return false;
+            }
+            //If we're also attempting to update the discharge it can't be before the admission date.
+            if(appointment.getExpDischarge() != null){
+                if(appointment.getAdmission().getTime() > appointment.getExpDischarge().getTime()){
+                    return false;
+                }
+            }
+            else if(expDis != -1){
+                if(appointment.getAdmission().getTime() > expDis){
+                    return false;
+                }
+            }
+            if(appointment.getActDischarge() != null){
+                if(appointment.getAdmission().getTime() > appointment.getActDischarge().getTime()){
+                    return false;
+                }
+            }
+            else if(actDis != -1){
+                if(appointment.getAdmission().getTime() > actDis){
+                    return false;
+                }
+            }
+        }
+        else{
+            //Else we're not trying to update admission, so if we're updating the discharges
+            //we need to test their values again the values already in the DB.
+            if(appointment.getExpDischarge() != null){
+                if(admission != -1){
+                    if(appointment.getExpDischarge().getTime() < admission){
+                        return false;
+                    }
+                }
+                else if(appointment.getExpDischarge().getTime() < apptDate){
+                    return false;
+                }
+            }
+            if(appointment.getActDischarge() != null){
+                if(admission != -1){
+                    if(appointment.getActDischarge().getTime() < admission){
+                        return false;
+                    }
+                }
+                else if(appointment.getActDischarge().getTime() < apptDate){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     public void setUpdateMessage(String updateMessage) {
         this.updateMessage = updateMessage;
     }

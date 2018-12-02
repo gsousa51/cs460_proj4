@@ -69,16 +69,20 @@ public class AppointmentController {
             long admission = this.getDate("Admission" , appointment.getAID());
             long expDischarge = this.getDate("Exp_Discharge" , appointment.getAID());
             long actDischarge = this.getDate("Act_Discharge" , appointment.getAID());
-
-            try {
-                this.jdbcTemplate.update(appointmentValidator.getUpdateMessage());
-            }catch(DataAccessException d){
-                //TODO: Send user to an error page.
-                System.err.println("****CAUGHT ERROR****");
-                d.printStackTrace();
+            if(appointmentValidator.validateUpdate(apptDate, admission, actDischarge, expDischarge)) {
+                try {
+                    this.jdbcTemplate.update(appointmentValidator.getUpdateMessage());
+                } catch (DataAccessException d) {
+                    //TODO: Send user to an error page.
+                    System.err.println("****CAUGHT ERROR****");
+                    d.printStackTrace();
+                    return "resultError";
+                }
+                System.err.println("executed update query");
+            }
+            else{
                 return "resultError";
             }
-            System.err.println("executed update query");
         }
         else{
             System.err.println("Invalid update message");
