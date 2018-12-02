@@ -92,12 +92,12 @@ public class AppointmentController {
         System.out.println(apptDate);
         return apptDate;
     }
-    private long getAdmissionDate(long AID){
+    private void getAdmissionDate(long AID){
         System.out.println("****CALLED GET ADMISSION DATE***");
         String query = "SELECT admission FROM aswindle.appointment WHERE AID = ?";
-        long admission = this.jdbcTemplate.queryForObject(
-                query, new Object[] {AID}, Long.class);
+        String admission = this.jdbcTemplate.queryForObject(
+                query, new Object[] {AID}, String.class);
         System.out.println(admission);
-        return admission;
+
     }
 }
