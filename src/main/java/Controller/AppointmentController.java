@@ -65,8 +65,11 @@ public class AppointmentController {
         model.addAttribute("validation", appointmentValidator);
 
         if(appointmentValidator.isValidUpdate()){
-            this.getApptDate(appointment.getAID());
-            this.getAdmissionDate(appointment.getAID());
+            this.getDate("Appt_Date" , appointment.getAID());
+            this.getDate("Admission" , appointment.getAID());
+            this.getDate("Exp_Discharge" , appointment.getAID());
+            this.getDate("Act_Discharge" , appointment.getAID());
+
             try {
                 this.jdbcTemplate.update(appointmentValidator.getUpdateMessage());
             }catch(DataAccessException d){
@@ -84,24 +87,17 @@ public class AppointmentController {
         return "resultAppointment";
     }
 
-    private long getApptDate(long AID){
-        System.out.println("****CALLED GET APPT DATE***");
-        String query = "SELECT appt_date FROM aswindle.appointment WHERE AID = ?";
-        long apptDate = this.jdbcTemplate.queryForObject(
-                query, new Object[] {AID}, Long.class);
-        System.out.println(apptDate);
-        return apptDate;
-    }
-    private void getAdmissionDate(long AID){
-        System.out.println("****CALLED GET ADMISSION DATE***");
-        String query = "SELECT admission FROM aswindle.appointment WHERE AID = ?";
-        String admission = this.jdbcTemplate.queryForObject(
+    private long getDate(String colName, long AID){
+        String query = "SELECT " + colName + " FROM aswindle.appointment WHERE AID = ?";
+        String result = this.jdbcTemplate.queryForObject(
                 query, new Object[] {AID}, String.class);
-        System.out.println("ADMISSION: " + admission);
-        if(admission.equals("null")){
+        System.out.println(colName + ": " + result);
+        if(result == null){
             System.out.println("VALUE WAS NULL");
+            return -1;
         }
-
-
+        else{
+            return Long.parseLong(result);
+        }
     }
 }
