@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Query 3</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Patients Hospitalized Days Or More with Outstanding Charges</h1>
+<form action="#" th:action="@{/query3}" th:object="${query3}" method="post">
+    <p><input type="submit" value="Run Query" /> <input type="reset" value="Reset" /></p>
+</form>
+
+
+</body>
+</html>
