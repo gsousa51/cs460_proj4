@@ -1,5 +1,19 @@
 package Validator;
+/*
+    Class: StaffValidator
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This class is used in StaffController, and is used to validate/create
+    INSERT and UPDATE queries on our Staff Table.
 
+    Public Methods:
+        getUpdateMessage(), getInsertMessage()
+        It used by StaffController, found in Controller package.
+        Descriptions for each can be found above each method.
+ */
 import Model.Staff;
 
 public class StaffValidator {
@@ -17,10 +31,13 @@ public class StaffValidator {
     }
 
     /*
-    Status, dept_ID, office
-     */
+         Method uses the parameters stored in the Staff object and creates an INSERT sql query
+         to be used on the staff table. Note that we only check if some values are empty
+         since some are required to be entered by user on the Front-End.
+
+         Return Val: An INSERT query for aswindle.Staff.
+      */
     public String createInsertMessage(){
-        //TODO: Do we want to do this?
         this.validInsert = true;
         String insertMessage = "INSERT INTO aswindle.staff VALUES(";
         insertMessage = insertMessage.concat(staff.getID()+",");
@@ -60,7 +77,12 @@ public class StaffValidator {
 
         return insertMessage;
     }
+    /*
+        Method takes fields from Staff object to create an UPDATE SQL query.
+        If there are no fields to add to the UPDATE query, then we say the UPDATE query is invalid.
 
+        Return : String containing an UPDATE SQL query for aswindle.Staff.
+     */
     public String createUpdateMessage(){
         String updateMessage = "UPDATE aswindle.Staff \nSET ";
 

@@ -1,5 +1,18 @@
 package Controller;
-
+/*
+    Class: StaffController
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This is the Controller that we're using for INSERT/UPDATE pages that we're
+    using manipulate the Staff table. This class uses StaffValidator which can be found
+    in the Validator package. We use it to validate the data the user is attempting to use to
+    manipulate the Staff table.
+    This class also requires the project to have access to Java.SpringFramework so we can use its
+    annotations/methods.
+ */
 import Validator.StaffValidator;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -45,6 +58,20 @@ public class StaffController {
         return "updateStaff";
     }
 
+    /*
+    Method is called when user hits submit at addStaff, this endpoint will be hit.
+    The parameters given are the model we're working with and an Staff object
+    which serves as the Bean for the user's input.
+
+    We'll validate that this is a valid insertStatement and attempt to execute the query.
+
+    If any errors occur during the insertion OR if this was determined to be an invalid INSERT
+    by our validator, then we'll send the user to a page that tells them the query was invalid.
+
+    Else we send the user to /resultStaff.
+
+    Return value: The URL to show.
+ */
     @PostMapping("/addStaff")
     public String staffAdd(@ModelAttribute Staff staff) {
         StaffValidator staffValidator = new StaffValidator(staff);
@@ -64,7 +91,13 @@ public class StaffController {
         return "resultStaff";
     }
 
+    /*
+        Method simply queries our DB to delete the row whose column's PK matches the
+        ID given in the Staff bean object sent in.
 
+        Return value: "resultError" if query results in an error
+                      "resultStaff" if query was successful.
+     */
 
     @PostMapping("/deleteStaff")
     public String staffDelete(@ModelAttribute Staff staff){
@@ -79,6 +112,20 @@ public class StaffController {
         return "resultStaff";
     }
 
+    /*
+    Method is called when user hits submit at updateStaff, this endpoint will be hit.
+    The parameters given are the model we're working with and an Staff object
+    which serves as the Bean for the user's input.
+
+    We'll validate that this is a valid insertStatement and attempt to execute the query.
+
+    If any errors occur during the insertion OR if this was determined to be an invalid UPDATE
+    by our validator, then we'll send the user to a page that tells them the query was invalid.
+
+    Else we send the user to /resultStaff.
+
+    Return value: The URL to show.
+ */
     @PostMapping("/updateStaff")
     public String staffUpdate(@ModelAttribute Staff staff){
         StaffValidator staffValidator = new StaffValidator(staff);

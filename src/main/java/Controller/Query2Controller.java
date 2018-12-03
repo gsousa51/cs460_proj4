@@ -1,5 +1,18 @@
 package Controller;
+/*
+    Class: Query2Controller
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This is the Controller that we're using to execute Query 2 as defined by the project spec.
+    When the user tries to access the page to submit data and when they actually submit the data,
+    we'll be using this class to coordinate the behavior of the website.
 
+    This class also requires the project to have access to Java.SpringFramework so we can use its
+    annotations/methods.
+ */
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +49,16 @@ public class Query2Controller {
         model.addAttribute("query2", new Query2());
         return "query2";
     }
+    /*
+        This method is called after the user hits submit after inputting the Department name we'd like to use
+        for Query 2. These values are stored in the parameter Query2 query, which is a Bean object whose fields
+        are the data input by the user.
+        We'll take these values and execute the query, using a RowMapper to create a list of values
+        that are the result from the query. We'll add this list as an attribute to the model, so we can
+        access it in /resultQuery2.
 
+        Return value : "resultQuery2" so we can display this webpage to the user.
+     */
     @PostMapping("/query2")
     public String query2Submit(Model model, @ModelAttribute Query2 query) {
         List<String> allNames = this.jdbcTemplate.query(

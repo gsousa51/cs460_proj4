@@ -1,5 +1,19 @@
 package Validator;
+/*
+    Class: PatientValidator
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This class is used in PatientController, and is used to validate/create
+    INSERT and UPDATE queries on our Patient Table.
 
+    Public Methods:
+        getUpdateMessage(), getInsertMessage()
+        It used by PatientController, found in Controller package.
+        Descriptions for each can be found above each method.
+ */
 import Model.Patient;
 
 public class PatientValidator {
@@ -17,10 +31,13 @@ public class PatientValidator {
     }
 
     /*
-    Status, dept_ID, office
-     */
+         Method uses the parameters stored in the Patient object and creates an INSERT sql query
+         to be used on the patient table. Note that we only check if some values are empty
+         since some are required to be entered by user on the Front-End.
+
+         Return Val: An INSERT query for aswindle.Patient.
+      */
     public String createInsertMessage(){
-        //TODO: Do we want to do this?
         this.validInsert = true;
         String insertMessage = "INSERT INTO aswindle.patient VALUES(";
         insertMessage = insertMessage.concat(patient.getID()+",");
@@ -51,7 +68,12 @@ public class PatientValidator {
 
         return insertMessage;
     }
+    /*
+        Method takes fields from Patient object to create an UPDATE SQL query.
+        If there are no fields to add to the UPDATE query, then we say the UPDATE query is invalid.
 
+        Return : String containing an UPDATE SQL query for aswindle.Patient.
+     */
     public String createUpdateMessage(){
         String updateMessage = "UPDATE aswindle.Patient \nSET ";
 
