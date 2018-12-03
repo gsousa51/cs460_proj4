@@ -1,5 +1,19 @@
 package Validator;
+/*
+    Class: CashDataValidator
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This class is used in CashDataController, and is used to validate/create
+    INSERT and UPDATE queries on our CashData Table.
 
+    Public Methods:
+        getInsertMessage(), getUpdateMessage()
+        Both are used by CashDataController, found in Controller package.
+        Descriptions for each can be found above each method.
+ */
 import Model.CashData;
 
 public class CashDataValidator {
@@ -15,12 +29,17 @@ public class CashDataValidator {
         this.validInsert = true;
         this.updateMessage = createUpdateMessage();
     }
-    //TODO: We need to validate the admission dates...
+
     /*
-    Status, dept_ID, office
+        Method uses the parameters stored in the CashData object and creates an INSERT sql query
+        to be used on the Cash_Data table. Note that we only check if some values are empty
+        since some are required to be entered by user on the Front-End.
+
+        Return Val: An INSERT query for aswindle.Cash_Data.
      */
     public String createInsertMessage(){
-        //TODO: Do we want to do this?
+        //There will never be invalid inserts for this since our Front-End validates for us.
+        //However, we left this here for possible modifications in the future.
         this.validInsert = true;
         String insertMessage = "INSERT INTO aswindle.cash_Data VALUES(";
         insertMessage = insertMessage.concat(cashData.getXactID()+",");
@@ -40,7 +59,12 @@ public class CashDataValidator {
 
         return insertMessage;
     }
+    /*
+        Method takes fields from CashData object to create an UPDATE SQL query.
+        If there are no fields to add to the UPDATE query, then we say the UPDATE query is invalid.
 
+        Return : String containing an UPDATE SQL query for aswindle.Cash_Data.
+     */
     public String createUpdateMessage(){
         String updateMessage = "UPDATE aswindle.Cash_Data \nSET ";
 

@@ -1,5 +1,19 @@
 package Validator;
+/*
+    Class: NurseValidator
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This class is used in DoctorController, and is used to validate/create
+    INSERT and UPDATE queries on our Doctor Table.
 
+    Public Methods:
+        getUpdateMessage(), getInsertMessage()
+        It used by NurseController, found in Controller package.
+        Descriptions for each can be found above each method.
+ */
 import Model.Nurse;
 
 public class NurseValidator {
@@ -16,8 +30,13 @@ public class NurseValidator {
         this.updateMessage = createUpdateMessage();
     }
 
+
     /*
-    Status, dept_ID, office
+        Method uses the parameters stored in the Nurse object and creates an INSERT sql query
+        to be used on the nurse table. Note that we only check if some values are empty
+        since some are required to be entered by user on the Front-End.
+
+        Return Val: An INSERT query for aswindle.Nurse.
      */
     public String createInsertMessage(){
         //TODO: Do we want to do this?
@@ -46,7 +65,12 @@ public class NurseValidator {
 
         return insertMessage;
     }
+    /*
+        Method takes fields from Nurse object to create an UPDATE SQL query.
+        If there are no fields to add to the UPDATE query, then we say the UPDATE query is invalid.
 
+        Return : String containing an UPDATE SQL query for aswindle.Nurse.
+     */
     public String createUpdateMessage(){
         String updateMessage = "UPDATE aswindle.Nurse \nSET ";
 

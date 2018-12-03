@@ -1,7 +1,21 @@
 package Validator;
 
 import Model.Department;
+/*
+    Class: DepartmentValidator
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This class is used in CashDataController, and is used to validate/create
+    UPDATE queries on our CashData Table.
 
+    Public Methods:
+        getUpdateMessage()
+        It used by DepartmentController, found in Controller package.
+        Descriptions for each can be found above each method.
+ */
 public class DepartmentValidator {
 
     private Department department;
@@ -14,7 +28,12 @@ public class DepartmentValidator {
         this.updateMessage = createUpdateMessage();
     }
 
+    /*
+        Method takes fields from Department object to create an UPDATE SQL query.
+        If there are no fields to add to the UPDATE query, then we say the UPDATE query is invalid.
 
+        Return : String containing an UPDATE SQL query for aswindle.Department.
+     */
     public String createUpdateMessage(){
         String updateMessage = "UPDATE aswindle.Department \nSET ";
         if(!department.isEmptyOffice()){
