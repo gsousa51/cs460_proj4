@@ -1,5 +1,19 @@
 package Controller;
 
+/*
+    Class: Query1Controller
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This is the Controller that we're using to execute Query 1 as defined by the project spec.
+    When the user tries to access the page to submit data and when they actually submit the data,
+    we'll be using this class to coordinate the behavior of the website.
+
+    This class also requires the project to have access to Java.SpringFramework so we can use its
+    annotations/methods.
+ */
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +51,16 @@ public class Query1Controller {
         return "query1";
     }
 
+    /*
+        This method is called after the user hits submit after inputting the Name/DOB we'd like to use
+        for Query 1. These values are stored in the parameter Query1 query, which is a Bean object whose fields
+        are the data input by the user.
+        We'll take these values and execute the query, using a RowMapper to create a list of values
+        that are the result from the query. We'll add this list as an attribute to the model, so we can
+        access it in /resultQuery1.
+
+        Return value : "resultQuery1" so we can display this webpage to the user.
+     */
     @PostMapping("/query1")
     public String query1Submit(Model model, @ModelAttribute Query1 query) {
         List<String> allNames = this.jdbcTemplate.query(

@@ -1,5 +1,21 @@
 package Model;
+/*
+    Class: Appointment
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This class is used as a "Bean" for the values the user wants to use in UPDATE/INSERT
+    queries on the Appointment table.
+    NOTE: Please consult the README.md for what we're doing in the setters for Dates as well as the setters
+    for String whose suffix is s_.
 
+    Each field simply corresponds to a column in Appointment or is a flag/string rep for that column.
+
+    The only methods in this class are Getters/Setters used primarily by .html forms to store values
+    or display values, or this classes corresponding Controller found in the Controller package.
+ */
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +29,9 @@ public class Appointment {
     private boolean emptyDID;
     //Patient ID
     private long PID;
+    //Reason for visit
     private String reason;
+    //Various dates relating to Appointment
     private java.sql.Date apptDate;
     private java.sql.Date admission;
     private java.sql.Date expDischarge;

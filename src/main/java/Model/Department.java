@@ -1,5 +1,22 @@
 package Model;
 
+/*
+    Class: Department
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This class is used as a "Bean" for the values the user wants to use in UPDATE/INSERT
+    queries on the Department table.
+    NOTE: Please consult the README.md for what we're doing in the setters for Dates as well as the setters
+    for String whose suffix is s_.
+
+    Each field simply corresponds to a column in Department or is a flag/string rep for that column.
+
+    The only methods in this class are Getters/Setters used primarily by .html forms to store values
+    or display values, or this classes corresponding Controller found in the Controller package.
+ */
 public class Department {
     private long ID;
     private String name;
@@ -7,7 +24,6 @@ public class Department {
     private String s_office;
     private boolean emptyOffice;
 
-    //TODO: The spec says we should be able to update the building name...
     private String buildingName;
 
     public long getID() {

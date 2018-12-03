@@ -1,5 +1,19 @@
 package Controller;
 
+/*
+    Class: DoctorController
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This is the Controller that we're using for INSERT/UPDATE pages that we're
+    using manipulate the Doctor table. This class uses DoctorValidator which can be found
+    in the Validator package. We use it to validate the data the user is attempting to use to
+    manipulate the Doctor table.
+    This class also requires the project to have access to Java.SpringFramework so we can use its
+    annotations/methods.
+ */
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
@@ -49,6 +63,21 @@ public class DoctorController {
         model.addAttribute("doctor", new Doctor());
         return "updateDoctor";
     }
+
+    /*
+    Method is called when user hits submit at addDoctor, this endpoint will be hit.
+    The parameters given are the model we're working with and an Doctor object
+    which serves as the Bean for the user's input.
+
+    We'll validate that this is a valid insertStatement and attempt to execute the query.
+
+    If any errors occur during the insertion OR if this was determined to be an invalid INSERT
+    by our validator, then we'll send the user to a page that tells them the query was invalid.
+
+    Else we send the user to /resultDoctor.
+
+    Return value: The URL to show.
+ */
     @PostMapping("/addDoctor")
     public String doctorAdd(Model model, @ModelAttribute Doctor doctor) {
         DoctorValidator doctorValidator = new DoctorValidator(doctor);
@@ -70,6 +99,13 @@ public class DoctorController {
         return "resultDoctor";
     }
 
+    /*
+        Method simply queries our DB to delete the row whose column's PK matches the
+        ID given in the Doctor bean object sent in.
+
+        Return value: "resultError" if query results in an error
+                      "resultDoctor" if query was successful.
+     */
     @PostMapping("/deleteDoctor")
     public String doctorDelete(@ModelAttribute Doctor doctor){
         Object[] ID = {doctor.getID()};
@@ -83,6 +119,20 @@ public class DoctorController {
         return "resultDoctor";
     }
 
+    /*
+    Method is called when user hits submit at updateDoctor, this endpoint will be hit.
+    The parameters given are the model we're working with and an Doctor object
+    which serves as the Bean for the user's input.
+
+    We'll validate that this is a valid insertStatement and attempt to execute the query.
+
+    If any errors occur during the insertion OR if this was determined to be an invalid UPDATE
+    by our validator, then we'll send the user to a page that tells them the query was invalid.
+
+    Else we send the user to /resultDoctor.
+
+    Return value: The URL to show.
+ */
     @PostMapping("/updateDoctor")
     public String doctorUpdate(Model model, @ModelAttribute Doctor doctor){
         DoctorValidator doctorValidator = new DoctorValidator(doctor);
@@ -105,16 +155,3 @@ public class DoctorController {
         return "resultDoctor";
     }
 }
-    /*
-            List<String> allNames = this.jdbcTemplate.query(
-                "select * from aswindle.doctor",
-                new RowMapper<String>() {
-                    public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        long first_name = rs.getLong("DOB");
-                        String last_name = rs.getString("L_NAME");
-                        System.out.println(first_name + " " + last_name);
-                        return (first_name + " " + last_name);
-                    }
-                });
-        System.out.println(allNames.toString());
-     */

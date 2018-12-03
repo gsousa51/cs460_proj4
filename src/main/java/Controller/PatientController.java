@@ -1,5 +1,18 @@
 package Controller;
-
+/*
+    Class: PatientController
+    Students: Gary Sousa and Alex Swindle
+    Group: Group1
+    Assignment: Program 4
+    Due: December 4th, 2018
+    Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
+    Purpose: This is the Controller that we're using for INSERT/UPDATE pages that we're
+    using manipulate the Patient table. This class uses PatientValidator which can be found
+    in the Validator package. We use it to validate the data the user is attempting to use to
+    manipulate the Patient table.
+    This class also requires the project to have access to Java.SpringFramework so we can use its
+    annotations/methods.
+ */
 import Validator.PatientValidator;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -44,6 +57,21 @@ public class PatientController {
         return "updatePatient";
 
     }
+
+    /*
+    Method is called when user hits submit at addPatient, this endpoint will be hit.
+    The parameters given are the model we're working with and an Patient object
+    which serves as the Bean for the user's input.
+
+    We'll validate that this is a valid insertStatement and attempt to execute the query.
+
+    If any errors occur during the insertion OR if this was determined to be an invalid INSERT
+    by our validator, then we'll send the user to a page that tells them the query was invalid.
+
+    Else we send the user to /resultPatient.
+
+    Return value: The URL to show.
+ */
     @PostMapping("/addPatient")
     public String patientAdd(Model model, @ModelAttribute Patient patient) {
         PatientValidator patientValidator = new PatientValidator(patient);
@@ -64,6 +92,13 @@ public class PatientController {
         return "resultPatient";
     }
 
+    /*
+        Method simply queries our DB to delete the row whose column's PK matches the
+        ID given in the Patient bean object sent in.
+
+        Return value: "resultError" if query results in an error
+                      "resultPatient" if query was successful.
+     */
     @PostMapping("/deletePatient")
     public String patientDelete(@ModelAttribute Patient patient){
         Object[] ID = {patient.getID()};
@@ -77,6 +112,20 @@ public class PatientController {
         return "resultPatient";
     }
 
+    /*
+Method is called when user hits submit at updatePatient, this endpoint will be hit.
+The parameters given are the model we're working with and an Patient object
+which serves as the Bean for the user's input.
+
+We'll validate that this is a valid insertStatement and attempt to execute the query.
+
+If any errors occur during the insertion OR if this was determined to be an invalid UPDATE
+by our validator, then we'll send the user to a page that tells them the query was invalid.
+
+Else we send the user to /resultPatient.
+
+Return value: The URL to show.
+*/
     @PostMapping("/updatePatient")
     public String patientUpdate(Model model, @ModelAttribute Patient patient){
         PatientValidator patientValidator = new PatientValidator(patient);
