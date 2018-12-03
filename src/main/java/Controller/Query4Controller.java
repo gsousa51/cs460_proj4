@@ -62,17 +62,21 @@ public class Query4Controller {
     @PostMapping("/query4")
     public String query4Submit(Model model, @ModelAttribute Query4 query) {
         List<String> allNames = this.jdbcTemplate.query(
-                "SELECT DISTINCT p.f_name, p.l_name, ph.medicine\n" +
-                        "FROM aswindle.patient p, aswindle.pharm_data ph, aswindle.recept_data rd\n" +
+                "SELECT DISTINCT p.f_name, p.l_name, ph.medicine, pharm.f_name AS pharmf, pharm.l_name AS pharml\n" +
+                        "FROM aswindle.patient p, aswindle.pharm_data ph, aswindle.pharmacist pharm, aswindle.recept_data rd\n" +
                         "WHERE rd.eid = ?\n" +
                         "AND p.pid = rd.pid\n" +
                         "AND ph.pid = p.pid\n" +
+                        "AND pharm.phid = ph.phid\n" +
                         "ORDER BY p.l_name", new RowMapper<String>() {
                     public String mapRow(ResultSet rs, int rowNum) throws SQLException {
                         String first_name = rs.getString("f_name");
                         String last_name = rs.getString("l_name");
                         String medicine = rs.getString("medicine");
-                        return (String.format("Name: %s %s, Medicine: %s", first_name, last_name, medicine));
+                        String pharmf = rs.getString("pharmf");
+                        String pharml = rs.getString("pharml");
+                        return (String.format("Name: %s %s, Medicine: %s, Prescribed by: %s %s",
+                                first_name, last_name, medicine, pharmf, pharml));
                     }
                 }, query.getEID());
 
