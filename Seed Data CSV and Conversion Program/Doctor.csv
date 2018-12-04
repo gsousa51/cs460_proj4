@@ -1,0 +1,10 @@
+DID,L_Name,F_Name,DOB,Status,Dept_ID,Office
+4001,Wayne,John ER,5/1/1980,trainee,3,20
+4002,Jones,James Surgeon,5/2/1980,tenured,4,21
+4003,Williams,Linda Oncology,5/3/1980,visiting,5,22
+4004,Johnson,Carl Cardiology,5/4/1980,trainee,6,23
+4005,Peterson,Pete Pediatrics,5/5/1980,tenured,7,24
+4006,Wayne,Thomas ER,5/6/1980,visiting,3,25
+4007,Prince,Diana Surgeon,5/7/1980,trainee,4,26
+4008,Parker,Peter Oncology,5/8/1980,tenured,5,27
+4009,Cats,Cardiac,5/9/1980,visiting,6,28

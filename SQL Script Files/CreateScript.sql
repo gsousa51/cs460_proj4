@@ -1,0 +1,172 @@
+@ config.sql
+DROP TABLE Patient CASCADE CONSTRAINTS;
+DROP TABLE Nurse CASCADE CONSTRAINTS;
+DROP TABLE Doctor CASCADE CONSTRAINTS;
+DROP TABLE Pharmacist CASCADE CONSTRAINTS;
+DROP TABLE Staff CASCADE CONSTRAINTS;
+DROP TABLE Room CASCADE CONSTRAINTS;
+DROP TABLE Building CASCADE CONSTRAINTS;
+DROP TABLE Department CASCADE CONSTRAINTS;
+DROP TABLE Appointment CASCADE CONSTRAINTS;
+DROP TABLE Pharm_Data CASCADE CONSTRAINTS;
+DROP TABLE Recept_Data CASCADE CONSTRAINTS;
+DROP TABLE Cash_Data CASCADE CONSTRAINTS;
+
+CREATE TABLE Patient
+	(PID int NOT NULL PRIMARY KEY,
+	L_Name varchar2(64) NOT NULL,
+	F_Name varchar2(64) NOT NULL,
+	Gender varchar2(1),
+	DOB number(20),
+	Address varchar2(64),
+	Phone number(10));
+
+CREATE TABLE Nurse
+	(NID int NOT NULL PRIMARY KEY,
+	L_Name varchar2(64) NOT NULL,
+	F_Name varchar2(64) NOT NULL,
+	DOB number(20),
+	Room int,
+	Dept_ID int);
+	
+CREATE TABLE Doctor
+	(DID int NOT NULL PRIMARY KEY,
+	L_Name varchar2(64) NOT NULL,
+	F_Name varchar2(64) NOT NULL,
+	DOB number(20),
+	Status varchar2(64),
+	Dept_ID int,
+	Office int);
+
+CREATE TABLE Pharmacist
+	(PHID int NOT NULL PRIMARY KEY,
+	L_Name varchar2(64) NOT NULL,
+	F_Name varchar2(64) NOT NULL,
+	DOB number(20),
+	Office int,
+	Dept_ID int);
+
+CREATE TABLE Staff
+	(EID int NOT NULL PRIMARY KEY,
+	L_Name varchar2(64) NOT NULL,
+	F_Name varchar2(64) NOT NULL,
+	DOB number(20),
+	Salary int,
+	Dept_ID int,
+	Office int,
+	Title varchar2(128));
+
+CREATE TABLE Room
+	(Room_ID int NOT NULL PRIMARY KEY,
+	Building_Name varchar2(1),
+	Type varchar2(128),
+	Capacity int);
+
+CREATE TABLE Building
+	(Building_Name varchar2(1) NOT NULL PRIMARY KEY,
+	Address varchar2(64));
+
+CREATE TABLE Department
+	(Dept_ID int NOT NULL PRIMARY KEY,
+	Dept_Name varchar2(128) NOT NULL,
+	Office int NOT NULL);
+	
+CREATE TABLE Appointment
+	(AID int NOT NULL PRIMARY KEY,
+	PID int NOT NULL,
+	DID int NOT NULL,
+	Reason varchar2(64),
+	Appt_Date number(20),
+	Admission number(20),
+	Exp_Discharge number(20),
+	Act_Discharge number(20),
+	Room int,
+	Treatment varchar2(20));
+
+CREATE TABLE Pharm_Data
+	(PHID int NOT NULL,
+	PID int NOT NULL,
+	Medicine varchar2(64) NOT NULL,
+	Days int NOT NULL);
+
+CREATE TABLE Recept_Data
+	(EID int NOT NULL,
+	PID int NOT NULL,
+	AID int NOT NULL);
+	
+CREATE TABLE Cash_Data
+	(Xact_ID int NOT NULL PRIMARY KEY,
+	EID int NOT NULL,
+	PID int NOT NULL,
+	Amount int NOT NULL,
+	Due number(20) NOT NULL,
+	Status varchar2(7) NOT NULL,
+	Paid number(20));
+
+ALTER TABLE Doctor
+ADD CONSTRAINT docdeptfk FOREIGN KEY (Dept_ID) REFERENCES Department(Dept_ID) ON DELETE CASCADE
+ADD CONSTRAINT docofficefk FOREIGN KEY (Office) REFERENCES Room(Room_ID) ON DELETE CASCADE;
+
+ALTER TABLE Nurse
+ADD CONSTRAINT nursedeptfk FOREIGN KEY (Dept_ID) REFERENCES Department(Dept_ID) ON DELETE CASCADE
+ADD CONSTRAINT nurseofficefk FOREIGN KEY (Room) REFERENCES Room(Room_ID) ON DELETE CASCADE;
+
+ALTER TABLE Pharmacist
+ADD CONSTRAINT pharmdeptfk FOREIGN KEY (Dept_ID) REFERENCES Department(Dept_ID) ON DELETE CASCADE
+ADD CONSTRAINT pharmofficefk FOREIGN KEY (Office) REFERENCES Room(Room_ID) ON DELETE CASCADE;
+
+ALTER TABLE Staff
+ADD CONSTRAINT staffdeptfk FOREIGN KEY (Dept_ID) REFERENCES Department(Dept_ID) ON DELETE CASCADE
+ADD CONSTRAINT staffofficefk FOREIGN KEY (Office) REFERENCES Room(Room_ID) ON DELETE CASCADE;
+
+ALTER TABLE Room
+ADD CONSTRAINT roombuildingfk FOREIGN KEY (Building_Name) REFERENCES Building(Building_Name) ON DELETE CASCADE;
+
+ALTER TABLE Department
+ADD CONSTRAINT deptroomfk FOREIGN KEY (Office) REFERENCES Room(Room_ID) ON DELETE CASCADE;
+
+ALTER TABLE Appointment
+ADD CONSTRAINT apptpidfk FOREIGN KEY (PID) REFERENCES Patient(PID) ON DELETE CASCADE
+ADD CONSTRAINT apptdidfk FOREIGN KEY (DID) REFERENCES Doctor(DID) ON DELETE CASCADE
+ADD CONSTRAINT apptroomfk FOREIGN KEY (Room) REFERENCES Room(Room_ID) ON DELETE CASCADE;
+
+ALTER TABLE Pharm_Data
+ADD CONSTRAINT pharmphid FOREIGN KEY (PHID) REFERENCES Pharmacist(PHID) ON DELETE CASCADE
+ADD CONSTRAINT pharmpid FOREIGN KEY (PID) REFERENCES Patient(PID) ON DELETE CASCADE;
+
+ALTER TABLE Recept_Data
+ADD CONSTRAINT recepeidfk FOREIGN KEY (EID) REFERENCES Staff(EID) ON DELETE CASCADE
+ADD CONSTRAINT receppid FOREIGN KEY(PID) REFERENCES Patient(PID) ON DELETE CASCADE
+ADD CONSTRAINT recepaidfk FOREIGN KEY(AID) REFERENCES Appointment(AID) ON DELETE CASCADE;
+
+ALTER TABLE Cash_Data
+ADD CONSTRAINT casheidfk FOREIGN KEY(EID) REFERENCES Staff(EID) ON DELETE CASCADE
+ADD CONSTRAINT cashpidfk FOREIGN KEY(PID) REFERENCES Patient(PID) ON DELETE CASCADE;
+
+GRANT ALL ON Patient TO PUBLIC;
+GRANT ALL ON Nurse TO PUBLIC;
+GRANT ALL ON Doctor TO PUBLIC;
+GRANT ALL ON Pharmacist TO PUBLIC;
+GRANT ALL ON Staff TO PUBLIC;
+GRANT ALL ON Room TO PUBLIC;
+GRANT ALL ON Building TO PUBLIC;
+GRANT ALL ON Department TO PUBLIC;
+GRANT ALL ON Appointment TO PUBLIC;
+GRANT ALL ON Pharm_Data TO PUBLIC;
+GRANT ALL ON Recept_Data TO PUBLIC;
+GRANT ALL ON Cash_Data TO PUBLIC;
+
+
+@ Building.sql
+@ Room.sql
+@ Department.sql
+@ Patient.sql
+@ Nurse.sql
+@ Doctor.sql
+@ Pharmacist.sql
+@ Staff.sql
+@ Appointment.sql
+@ Pharm_Data.sql
+@ Recept_Data.sql
+@ Cash_Data.sql
+commit;
