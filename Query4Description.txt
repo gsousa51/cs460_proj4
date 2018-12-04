@@ -1,0 +1,18 @@
+Students: Gary Sousa and Alex Swindle
+Group: Group 1
+
+Query 4 Description
+-------------------
+
+Parameter: Receptionist ID
+Values: The medications/prescriber/and patients for all records in the receptionist's data.
+
+That is, for every patient in the Receptionist's logs of appointment, if they are prescribed a medicine, we return the pharmacist in charge of it,
+the patient's name, and the medicine.
+
+
+This query satisfies all parts of the spec because we must first reference the Receptionist table, and then move to the Receptionist_Data table to pull
+in all patients and their medicine. Then using the PID found in Receptionist_Data, we join on the Pharamcist table on the matching PIDs.
+
+In reality, this query would be useful if we wanted to see what percentages of patients were being prescribed what medications, but breaking it up
+into various pieces. In this case, these pieces would be partitioned by the receptionist who holds the patient's appointment.

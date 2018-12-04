@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
     Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
     Purpose: This class is used as a "Bean" for the values the user wants to use in UPDATE/INSERT
     queries on the Doctor table.
-    NOTE: Please consult the README.md for what we're doing in the setters for Dates as well as the setters
+    NOTE: Please consult the README.txt for what we're doing in the setters for Dates as well as the setters
     for String whose suffix is s_.
 
     Each field simply corresponds to a column in Doctor or is a flag/string rep for that column.

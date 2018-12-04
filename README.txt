@@ -1,9 +1,31 @@
 "# cs46-Proj4" 
 Port-Number: For the moment is 10014.
 
+Operation: To run the project, first tunnel into port 10014.
+           Cd into the project directory and run mvn spring-boot:run
+           On browser run localhost:10014
+           NOTE: We have strict primary key/foreign key references. If you attempt to
+           add or update a table with a foreign key that doesn't currently exist in the parent table,
+           the project will throw an error. To find a range of valid primary keys that currently exist in the db,
+           reference the list below
+           The range of numbers is the range of valid pk for that table, i.e. for Patient, we're referencing PID:
 
-Query 4: For an appointment list of a given EID, list all of the medications/who prescribed them for all patients
-found in this appointment list.
+           Patient: 	1001 - 1042
+           Doctor: 	4001 - 4009
+           Pharmacist: 6001 - 6004
+           Nurse: 		7001 - 7010
+           Staff: 		8001 - 8004 8001, 8002 cashier; 8003, 8004 receptionist
+           Xact_ID:	5001 - 5019
+           Hospital: 	 173 - 300
+           Department:	   1 - 9
+           Appt:		9001 - 9019
+
+Work Distribution:
+    Gary built the front/back-end for adding, updating, and removing from all of the tables required.
+    I.e. Patient, Doctor, etc.
+    Alex created data and seeded it into our db. He also wrote up the front/backend for queries 1 - 4.
+
+    Overall, there was equal distribution of work amongst the two members.
 
 NOTE: Rather than commenting every single setDate method and setLong in the Model package, I'll add it here.
 

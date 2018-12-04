@@ -6,7 +6,7 @@ package Controller;
     Assignment: Program 4
     Due: December 4th, 2018
     Class: Cs460 - Dr. Lester McCann - TAs Terrance Lim and Bailey Nottingham
-    Purpose: This is the Controller that we're using to execute Query 4 as defined by  README.md
+    Purpose: This is the Controller that we're using to execute Query 4 as defined by  README.txt
     When the user tries to access the page to submit data and when they actually submit the data,
     we'll be using this class to coordinate the behavior of the website.
 
